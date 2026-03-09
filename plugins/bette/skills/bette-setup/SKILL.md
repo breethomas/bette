@@ -402,9 +402,8 @@ THINK (26 skills) — PM frameworks, active now
 OPERATE (23 skills) — Daily operations, need MCP connections
   Comms: catchup, email-inbox, email-find, slack-inbox, slack-find, slack-catchup
   Meetings: digest, sync-transcripts, prep-1on1, log-1on1, coach-me, synthesize
-  Planning: backlog, focus, weekly-review, exec-update
+  Planning: backlog, focus, weekly-review
   People: prep-review
-  Reporting: add-mdna, draft-mdna
   Publishing: save-notion, pyramid
   Health: bette-health
 
