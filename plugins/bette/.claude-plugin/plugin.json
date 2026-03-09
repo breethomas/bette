@@ -10,7 +10,6 @@
   "license": "MIT",
   "homepage": "https://github.com/breethomas/bette#readme",
   "skills": "./skills/",
-  "agents": "./agents/",
   "keywords": [
     "product-management",
     "pm-tools",
