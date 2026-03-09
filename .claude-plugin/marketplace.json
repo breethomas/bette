@@ -1,0 +1,14 @@
+{
+  "name": "bette",
+  "owner": {
+    "name": "Bree Thomas",
+    "url": "https://github.com/breethomas"
+  },
+  "plugins": [
+    {
+      "name": "bette",
+      "source": "./plugins/bette",
+      "description": "A PM operating system built on Claude Code. 57 skills for strategic thinking, daily operations, quality gates, and context engineering. One install, one system."
+    }
+  ]
+}
