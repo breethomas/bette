@@ -405,7 +405,6 @@ OPERATE (23 skills) — Daily operations, need MCP connections
   Planning: backlog, focus, weekly-review
   People: prep-review
   Publishing: save-notion, pyramid
-  Health: bette-health
 
 WORK (3 skills) — Coding guardrails, for PMs who code
   quality-gate, session-log, pr-review
