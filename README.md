@@ -42,7 +42,7 @@ Run `/bette:bette-setup` and choose self-guided. You get the module map and docs
 
 ## What's Inside
 
-### Think — frameworks that sharpen decisions (26 skills)
+### Think — frameworks that sharpen decisions (30 skills)
 
 Strategic sparring grounded in frameworks from Marty Cagan, Teresa Torres, Elena Verna, Brian Balfour, Ryan Singer, Hamel Husain, and more.
 
@@ -56,7 +56,7 @@ Strategic sparring grounded in frameworks from Marty Cagan, Teresa Torres, Elena
 | `/bette:competitive-research` | Systematic competitor analysis with parallel agents |
 | `/bette:agency-ladder` | Plan v1→v2→v3 AI feature agency progression |
 
-And 19 more. Run `/skills` to see everything.
+And 23 more. Run `/skills` to see everything.
 
 ### Operate — run your day without losing the plot (23 skills)
 
@@ -69,8 +69,8 @@ Daily workflows for inbox triage, meeting prep, backlog management, and strategi
 | `/bette:prep-meeting` | Prep talk track for any meeting |
 | `/bette:backlog` | Process and prioritize your backlog |
 | `/bette:focus` | Surface today's top 3 priorities |
-| `/bette:exec-update` | Draft executive status update |
 | `/bette:weekly-review` | Run weekly review |
+| `/bette:synthesize` | Extract decisions and insights from transcripts |
 
 And 16 more. These skills work best with MCP integrations (Slack, Gmail, Notion, Linear).
 
