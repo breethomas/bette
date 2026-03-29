@@ -164,7 +164,7 @@ Beyond skills and agents, Bette includes reference material that skills draw fro
 
 **24 PM frameworks** organized by discipline: discovery, planning, growth, execution, measurement, and AI-era practices. Includes continuous discovery, Shape Up, growth loops, LNO prioritization, AI unit economics, and more.
 
-**14 thought leader profiles** capturing methodologies from Marty Cagan, Teresa Torres, Elena Verna, Brian Balfour, Ryan Singer, Chip Huyen, Lenny Rachitsky, and others. Skills reference these when applying frameworks.
+**15 thought leader profiles** capturing methodologies from Marty Cagan, Teresa Torres, Elena Verna, Brian Balfour, Boris Cherny, Ryan Singer, Chip Huyen, Lenny Rachitsky, and others. Skills reference these when applying frameworks.
 
 **4 templates** for common PM artifacts: AI product specs, lightweight PRDs, Linear issues, and competitive analysis.
 

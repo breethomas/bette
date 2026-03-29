@@ -64,4 +64,5 @@ Quick reference to all PM frameworks in this plugin.
 | Ravi Mehta | Strategy Stack | `/thought-leaders/ravi-mehta.md` |
 | Lenny Rachitsky | Product Growth | `/thought-leaders/lenny-rachitsky.md` |
 | Linear Method | Issues Not Stories | `/thought-leaders/linear-method.md` |
+| Boris Cherny | Claude Code Architecture | `/thought-leaders/boris-cherny.md` |
 | Reforge | Growth Frameworks | `/thought-leaders/reforge.md` |
