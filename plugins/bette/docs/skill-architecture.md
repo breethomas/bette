@@ -226,4 +226,33 @@ A skill that does work but doesn't persist state. Next time it runs, it starts f
 
 ---
 
+## Writing Lean Skills
+
+New skills should encode WHAT good looks like, not HOW to execute. Trust the model for execution — it's good at that. Your job is to tell it what you care about.
+
+A lean skill has four parts:
+
+1. **Trigger** — what the user says (natural language) or types (command) to invoke it
+2. **Context requirements** — what files and sources to load
+3. **Quality standard** — what good output looks like, what to avoid
+4. **Output format** — where results go and what shape they take
+
+That's it. No step-by-step process section. No "Step 1: Read the file. Step 2: Extract the fields." The model can figure out the how. You define the what and the bar.
+
+### The Durable Layer vs. the Evolvable Layer
+
+**Reference files are the durable layer.** People, domains, goals, preferences — these change slowly and compound over time. Invest heavily here. A great people.md makes every meeting prep skill better.
+
+**Skills are the evolvable layer.** They encode workflows that may change as models improve, as your role evolves, or as you discover better patterns. Write them lean so they're easy to update or retire.
+
+When in doubt about where to put information: if it's about your world (people, context, preferences), put it in a reference file. If it's about a workflow (how to process something, what to produce), put it in a skill.
+
+### Skills Get Leaner Over Time
+
+A skill written for an earlier model might include detailed execution steps that a current model handles natively. That's fine — they still work. But when writing NEW skills, start lean. When revisiting OLD skills, ask: "Does the model still need this instruction, or can I express this as a quality standard instead?"
+
+The trajectory is: verbose process instructions → quality standards + examples → just the quality bar. The model gets better; your skills get shorter.
+
+---
+
 *Skills are habits encoded. Design them well and your AI gets more useful every day.*

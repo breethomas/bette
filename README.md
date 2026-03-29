@@ -200,12 +200,12 @@ Bette includes a maturity model for AI-assisted PM work. Say **"check my setup"*
 
 | Level | What It Looks Like |
 |-------|-------------------|
-| **Ad Hoc** | Prompting AI, accepting output, hoping it works |
-| **Planned** | Preferences file exists, reference files, quality gates |
-| **Systematic** | Layered context, patterns captured, session management |
-| **Optimized** | AI manages routine execution within guardrails |
+| **Ad Hoc** | No context. Every session starts cold. |
+| **Planned** | Reference files exist. The AI starts warm. |
+| **Systematic** | Skills define quality standards. The system knows your patterns. |
+| **Optimized** | You steer, the system drives. It knows you. |
 
-Most people start at Ad Hoc. Setup gets you to Planned in five minutes. Systematic comes from using the system daily. Optimized is where the system starts anticipating what you need.
+Most people start at Ad Hoc. Setup gets you to Planned in five minutes. Systematic comes from using the system daily. Optimized is where the system needs less instruction from you, not more — because your preferences are so well-captured.
 
 ---
 
@@ -220,11 +220,19 @@ The architecture docs are included in the plugin under `docs/`. For deep dives i
 
 ---
 
+## Companion Plugins
+
+Bette handles PM workflows. For codebase comprehension — understanding architecture, dependencies, and what a change impacts without reading code — pair it with:
+
+- **[Understand Anything](https://github.com/Lum1104/Understand-Anything)** — Turns any codebase into an interactive knowledge graph. Built for product and design teams who need to understand systems without reading source code.
+
+---
+
 ## Contributing
 
 Bette is open source. PRs welcome — especially new skills, framework additions, and workflow improvements.
 
-Each skill is a single markdown file with a header and instructions. Look at any existing skill for the pattern.
+Each skill is a single markdown file with a header and instructions. Look at any existing skill for the pattern. New skills should follow the "lean" pattern: triggers, context requirements, quality standards, output format. Trust the model for execution.
 
 ---
 
