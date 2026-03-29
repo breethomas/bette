@@ -448,3 +448,14 @@ Balfour emphasizes: **"This is all happening so fast. I hope this post triggers 
 - Original article: "Four Fits for $100M+ Growth"
 - Reforge: Growth Series modules
 - Recent updates: Brian's posts on AI's impact on Four Fits (2024)
+
+---
+
+## Partnership as Channel Fit
+
+Partnerships are a channel fit question. When evaluating a partnership:
+
+- **What channel does this partner represent?** Distribution (they put you in front of customers), data (they enrich your product), technology (they extend your capabilities), or credibility (their brand validates yours).
+- **Does it fit your model?** A partnership that requires enterprise sales motions doesn't fit a self-serve product. A data partnership that requires custom integration doesn't fit a low-touch model.
+- **Who benefits more?** Healthy partnerships create mutual value. If one side needs it dramatically more than the other, the terms will reflect that.
+- **What's the exit cost?** Partnerships create dependencies. Understand what happens if the partnership ends before you sign.

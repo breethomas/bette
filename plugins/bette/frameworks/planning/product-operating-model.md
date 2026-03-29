@@ -195,3 +195,14 @@ Use the Product Operating Model when:
 - Previous books: Inspired (how to work), Empowered (who does the work)
 
 **Remember:** This represents principles for organizations seeking competitive advantage through customer-centric innovation, not project-based delivery models.
+
+---
+
+## Managing Organizational Transformation
+
+Shifting to a product operating model is a transformation, not a switch.
+
+- **Sequence the change.** Don't transform everything at once. Pick one team, prove the model, expand. Early wins build credibility.
+- **Name the resistance.** Most resistance is rational — people are protecting what they know works. Acknowledge it, then show the alternative is better, not just different.
+- **Measure adoption, not just outcomes.** Outcomes take time. Track leading indicators: are teams making their own decisions? Are they talking to customers? Are they shipping smaller increments?
+- **Expect the messy middle.** Old process and new process will coexist. That's normal. The goal is directional progress, not a clean cutover.

@@ -12,6 +12,28 @@ His approach combines framework thinking with practical application - showing no
 
 ## Key Contributions
 
+### The Three Gulfs (with Hamel Husain)
+
+A diagnostic framework for why LLM pipelines fail. Three gaps between developer intent and pipeline behavior:
+
+1. **Gulf of Comprehension** (Developer → Data): At scale, you can't inspect every input or output. The challenge is understanding your data distribution and failure patterns without examining every example.
+2. **Gulf of Specification** (Developer → LLM Pipeline): Your intent is only loosely captured by your prompts. Unanswered questions (how detailed? what format? implicit vs explicit?) create ambiguity the model resolves on its own.
+3. **Gulf of Generalization** (Data → LLM Pipeline): The model applies instructions incorrectly across diverse inputs. Even perfect prompts can't prevent this — no model generalizes perfectly.
+
+**The fix:** Structured evaluation. Analyze → Measure → Improve, cycling continuously. Evals are to AI products what analytics are to traditional products.
+
+### PM's Guide to Autoresearch
+
+Adapted Karpathy's autoresearch pattern for PM work. The core insight: you define what "better" means, the agent runs 50+ rounds of optimization overnight.
+
+Three requirements: (1) a clear metric — binary yes/no questions, not vibes, (2) automated measurement — an eval that runs without you, (3) one mutable file — the agent changes this and nothing else.
+
+Works on any PM artifact: prompts, copy, email templates, skill files. "This is a new way to optimize anything."
+
+### Ralph Wiggum Technique
+
+A bash loop that runs Claude Code repeatedly, each iteration starting fresh (no context rot). Memory lives in three files: git commits (the code), progress.txt (learnings), prd.json (what's done, what's next). The agent picks a task, implements it, commits if tests pass, logs learnings, loops again. ~12 experiments per hour, ~100 overnight.
+
 ### Visual Frameworks Library
 
 **The approach:** Turn complex PM concepts into clear, visual frameworks that are:

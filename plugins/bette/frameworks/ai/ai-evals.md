@@ -20,6 +20,18 @@ Building AI products requires a fundamentally different approach to testing and 
 
 **But:** Evals are meant to help you ship faster, not slower.
 
+## The Three Gulfs (Husain & Gupta)
+
+Why LLM pipelines fail — three gaps between what you want and what you get:
+
+| Gulf | The Gap | The Challenge |
+|------|---------|--------------|
+| **Comprehension** (Developer → Data) | At scale, you can't inspect every input or output | Understanding data distribution and failure patterns without examining every example |
+| **Specification** (Developer → LLM Pipeline) | Your intent is only loosely captured by prompts | Unanswered questions (format? detail level? implicit vs explicit?) create ambiguity |
+| **Generalization** (Data → LLM Pipeline) | The model applies instructions inconsistently across diverse inputs | Even perfect prompts can't make any model generalize perfectly |
+
+**The fix:** Structured evaluation cycling through Analyze (inspect behavior, identify failure modes) → Measure (deploy evaluators, quantify failures) → Improve (targeted interventions to prompts, examples, or architecture). Then repeat.
+
 ## ⚠️ The Eval Balance
 
 **Two extremes to avoid:**

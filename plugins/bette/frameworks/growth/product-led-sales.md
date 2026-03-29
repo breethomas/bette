@@ -291,3 +291,15 @@ Threshold: 70+ = PQA
 - Podcast: Lenny's Newsletter - The ultimate guide to product-led sales
 
 **Remember:** Product-Led Sales reverses traditional sales: usage creates pipeline, not the other way around. The product does the heavy lifting; sales closes and expands.
+
+---
+
+## The Enterprise End State
+
+PLS naturally evolves toward enterprise. The progression:
+
+1. **Self-serve:** Individual users adopt, pay with a credit card. No sales involved.
+2. **Sales-assisted:** Usage signals trigger sales outreach. Sales closes deals that self-serve can't (multi-seat, procurement, security reviews).
+3. **Enterprise:** Dedicated sales motion for large accounts. But the entry point is still product usage — either by a champion inside the org or through a pilot.
+
+Enterprise PLS signals: deals stall at procurement (not product evaluation), buyers ask for custom contracts, implementation requires professional services, the buyer and the user are different people. When you see these, you need enterprise sales — but keep the product-led entry point. The worst move is abandoning PLG for a pure enterprise motion.

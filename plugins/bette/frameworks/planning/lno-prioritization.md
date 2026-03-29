@@ -228,3 +228,15 @@ Use LNO when:
 - Original framework: Shreyas Doshi (February 1, 2020)
 
 **Remember:** The best PMs don't try to do everything well—they identify leverage work and spike there while minimizing time on everything else.
+
+---
+
+## The Delegation Extension
+
+LNO naturally extends to delegation. Once you've categorized work:
+
+- **Leverage work:** You do this. It's where your unique judgment matters most.
+- **Neutral work:** Delegate with clear context. Share the quality bar and the "why," then trust the person to figure out the "how."
+- **Overhead work:** Delegate or automate aggressively. If you're doing overhead work that someone else could do, you're misallocating your highest-value time.
+
+The question isn't "can I do this?" It's "am I the right person to do this?" If the answer is no, delegate with context, not just the task.
