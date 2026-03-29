@@ -33,6 +33,9 @@ These profiles help you:
 - **Chip Huyen** - Production AI systems, ML engineering, data quality over tools
 - **Ravi Mehta** - Product Strategy Stack, AI integration framework
 
+### AI Tooling & Architecture
+- **Boris Cherny** - Claude Code architecture, behavioral CLAUDE.md, self-improving AI workflows
+
 ### Modern Execution
 - **Linear Team** - Issues not stories, direction-building-quality, modern workflows
 

@@ -180,6 +180,200 @@ The AI reads these files at the start of every session. Dense paragraphs waste t
 
 ---
 
+## Beyond CLAUDE.md: The Full .claude/ Infrastructure
+
+CLAUDE.md is the highest-leverage file, but it's one component of a larger system. As your setup matures, these additional pieces add scoping, enforcement, and specialization.
+
+### @import Syntax
+
+CLAUDE.md supports `@` syntax to pull in external files without bloating the main file:
+
+```markdown
+# Project Name
+
+See @README.md for project overview.
+See @package.json for available commands.
+
+## Additional context
+- Git workflow: @docs/git-workflow.md
+- API patterns: @docs/api-conventions.md
+```
+
+Claude resolves these references and loads the content on demand. This keeps CLAUDE.md lean while giving Claude access to deeper context when it needs it.
+
+**When to use @import vs. explicit loading instructions:**
+- `@file.md` — for context Claude should always have access to (architecture, conventions)
+- "Read file.md when working on X" — for context that's only relevant to specific tasks
+
+### .claude/rules/ — Path-Scoped Instructions
+
+As CLAUDE.md grows, instructions compete for attention. The `.claude/rules/` directory lets you split instructions into focused files that activate based on file paths.
+
+Every `.md` file in `.claude/rules/` is discovered recursively. Rules without frontmatter load unconditionally (like CLAUDE.md). Rules with `paths` frontmatter only load when Claude works on matching files.
+
+```markdown
+# .claude/rules/exec-updates.md
+---
+paths:
+  - "drafts/exec-*"
+  - "drafts/*-update*"
+---
+# Executive Update Rules
+
+- Lead with the decision or insight, not the background
+- Every bullet ties to strategic goals
+- No implementation details (no system names, no engineer names)
+- No "prove" language -- we're delivering, not proving
+- Pyramid structure: answer first, then supporting evidence
+```
+
+```markdown
+# .claude/rules/meeting-notes.md
+---
+paths:
+  - "transcripts/**"
+  - "drafts/digest-*"
+---
+# Meeting Note Extraction
+
+- Capture decisions and action items, not discussion
+- Conservative extraction: signal over noise
+- Attribute carefully -- double-check WHO said what
+- Convert relative dates to absolute (e.g., "Thursday" to actual date)
+```
+
+**For PMs, useful rules include:**
+- Exec communication format and constraints
+- Meeting note extraction standards
+- Linear issue writing conventions
+- Proposal structure and quality bars
+
+Rules without `paths` frontmatter load every session -- use these for universal standards. Rules with `paths` frontmatter stay dormant until Claude touches matching files.
+
+### .claude/agents/ — Custom Subagents
+
+Define specialized sub-agents with their own context windows, model preferences, and tool access:
+
+```markdown
+# .claude/agents/code-reviewer.md
+---
+name: code-reviewer
+description: Expert code reviewer. Use when reviewing PRs,
+  checking for bugs, or validating implementations.
+model: sonnet
+tools: Read, Grep, Glob
+---
+You are a senior code reviewer focused on correctness
+and maintainability.
+
+When reviewing code:
+- Flag bugs, not just style issues
+- Suggest specific fixes, not vague improvements
+- Note performance concerns only when they matter at scale
+```
+
+**Key configuration fields:**
+- `model` — which model the subagent uses (sonnet, opus, haiku, inherit)
+- `tools` — restricts available tools (a read-only auditor can't write files)
+- `permissionMode` — default, auto, or bypassPermissions
+- `skills` — preloads skill content so the subagent has domain knowledge
+- `isolation: worktree` — gives the subagent its own git worktree
+
+Subagents cannot spawn other subagents (prevents infinite nesting). Personal subagents in `~/.claude/agents/` are available across all projects.
+
+### .claude/settings.json — Permissions and Hooks
+
+Controls what Claude is allowed to do and what happens at lifecycle events.
+
+**Permissions** use allow/deny lists:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  }
+}
+```
+
+Allow list runs without confirmation. Deny list blocks entirely. Everything else prompts for confirmation.
+
+**Hooks** enforce rules deterministically -- they run scripts at lifecycle events rather than relying on the model to remember:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./scripts/context-hygiene.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./scripts/run-linter.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**Available hook events:** PreToolUse, PostToolUse, SessionStart, SessionEnd, SubagentStart, SubagentStop, PreCompact, PostCompact, Notification, Stop.
+
+Hook types: command (run a script), prompt (single LLM call to evaluate a condition), or agent (spawn a subagent to verify something).
+
+**For PMs, useful hooks:**
+- PreToolUse on Read: context hygiene warnings for large files and transcripts
+- SessionStart: auto-load daily priorities or check calendar
+- PostCompact: remind about session state that shouldn't be lost
+
+### settings.local.json — Personal Overrides
+
+Same format as settings.json but automatically gitignored. Use for personal permission overrides that shouldn't be committed to the shared repo.
+
+### ~/.claude/ — User-Level Directory
+
+The user-level directory holds personal configuration that applies across all projects:
+
+| Path | Purpose |
+|------|---------|
+| `~/.claude/CLAUDE.md` | Global instructions (all projects) |
+| `~/.claude/settings.json` | Global permissions and settings |
+| `~/.claude/skills/` | Personal skills (all projects) |
+| `~/.claude/agents/` | Personal subagents (all projects) |
+| `~/.claude/commands/` | Legacy commands (merged into skills) |
+| `~/.claude/output-styles/` | Custom response formatting |
+| `~/.claude/projects/` | Session history and auto-memory per project |
+| `~/.claude/agent-memory/` | Persistent memory for subagents |
+| `~/.claude/scheduled-tasks/` | Desktop app background tasks |
+
+**The two directories serve different purposes:**
+- **Project-level** (`.claude/` in repo root) — committed to git, shared with team. Defines how the team works.
+- **User-level** (`~/.claude/` in home dir) — never committed. Defines how you work.
+
+---
+
 ## Common Patterns
 
 ### The Routing Pattern

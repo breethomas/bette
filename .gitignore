@@ -1,2 +1,12 @@
 .makemd/
 sessions/
+
+# Private operational data (never publish)
+drafts/
+transcripts/
+people/
+email/
+slack/
+memory/
+.obsidian/
+Screenshot*
