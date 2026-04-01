@@ -213,7 +213,7 @@ Most people start at Ad Hoc. Setup gets you to Planned in five minutes. Systemat
 
 The architecture docs are included in the plugin under `docs/`. For deep dives into the design philosophy, the companion repos break out each component:
 
-- **[bette-architect](https://github.com/breethomas/bette-architect)** — Context engineering: preferences design, reference files, memory systems, skill architecture
+- **[bette-architect](https://github.com/breethomas/bette-architect)** — Context engineering: preferences design, reference files, memory systems, context hygiene, skill architecture
 - **[bette-think](https://github.com/breethomas/bette-think)** — PM frameworks and thought leader profiles
 - **[bette-work](https://github.com/breethomas/bette-work)** — Quality principles, maturity model, session management
 - **[bette-os](https://github.com/breethomas/bette-os)** — Daily workflow patterns and operational design

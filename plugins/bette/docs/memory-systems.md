@@ -22,7 +22,41 @@ Claude Code provides an auto-memory directory that persists across conversations
   integrations.md     ← Topic file, loaded on demand
 ```
 
-**MEMORY.md is prime real estate.** It's loaded every session, so every line costs tokens. Keep it under 200 lines — anything past that gets truncated.
+**MEMORY.md is prime real estate.** It's loaded every session, so every line costs tokens. Keep it under 200 lines -- anything past that gets silently truncated. The AI has no idea lines were cut.
+
+### How Retrieval Works
+
+Each turn, a separate model call scans all memory file names and descriptions, then picks the 5 most relevant to load. This is filename-based matching, not semantic search or embeddings. This means:
+
+- **File names matter.** `feedback_testing.md` gets retrieved when testing comes up. `misc_notes_3.md` never does.
+- **Description frontmatter matters.** The one-line description in each topic file is what the retrieval model reads to decide relevance.
+- **Max 5 files per turn.** If you have 30 topic files, 25 are invisible on any given turn. Name them well.
+
+### MEMORY.md as Index, Not Content
+
+MEMORY.md should be an index of one-line pointers to topic files -- not a place to store content directly. Every multi-line block in MEMORY.md is eating your 200-line budget.
+
+**Bad** (content inlined, 10 lines for one topic):
+```markdown
+## Pricing Model
+- APU = Active Portal User
+- Four corners applies to the client experience
+- SaaS continues as the pedal tone
+- Middle Earth is the transitional state
+```
+
+**Good** (pointer, 1 line):
+```markdown
+- [Pricing model](project_pricing-model.md) -- APU definition, four corners, SaaS pedal tone
+```
+
+The content lives in the topic file where it has room to breathe. MEMORY.md stays lean.
+
+### Compaction and Memory
+
+Auto-compaction fires at ~167,000 tokens. When it does, it compresses everything into a ~50,000-token summary and retains only 5 files in full. Every file read, reasoning chain, and intermediate decision is discarded.
+
+Memory files are not affected by compaction -- they persist on disk. But if your MEMORY.md is bloated with inlined content, it's wasting tokens in the summary budget too. A lean MEMORY.md means more room for actual work context to survive compaction.
 
 ## What to Save
 
@@ -92,15 +126,35 @@ Organize semantically by topic, not chronologically.
 
 ### Topic Files
 
-When a section of MEMORY.md grows too large, extract it into a topic file and link from MEMORY.md.
+When a section of MEMORY.md grows past 3-4 lines, extract it into a topic file and replace with a one-line pointer.
 
-```markdown
-## Integration Gotchas
-See [integrations.md](integrations.md) for detailed tool-specific notes.
-Key issues:
-- Slack: always use detailed format
-- Notion: don't overwrite pages being actively edited
+**Topic file naming convention:**
 ```
+{type}_{topic}.md
+
+Types: user, feedback, project, reference
+Examples: feedback_testing.md, project_pricing-model.md, user_role-context.md
+```
+
+**Topic file frontmatter** (required for retrieval):
+```markdown
+---
+name: Pricing model
+description: APU definition, four corners, SaaS pedal tone, transitional state
+type: project
+---
+
+[content here]
+```
+
+The `description` field is what the retrieval model reads to decide whether to load this file. Make it specific enough to match relevant queries.
+
+**MEMORY.md pointer:**
+```markdown
+- [Pricing model](project_pricing-model.md) -- APU definition, four corners, SaaS pedal tone
+```
+
+One line. Under 150 characters. The description in the pointer and the frontmatter should be similar but don't need to be identical.
 
 ---
 
@@ -163,11 +217,20 @@ An entry is probably stale when:
 
 ### The 200-Line Budget
 
-MEMORY.md has a hard limit. When you're approaching it:
-1. Move detailed sections to topic files
-2. Compress multi-line entries to single lines
-3. Remove anything that's now covered by CLAUDE.md or reference files
-4. Delete entries that haven't been relevant in 30+ days
+MEMORY.md has a hard limit of 200 lines. Content past line 200 is silently truncated -- the AI sees clean input and has no idea it was cut. This is not a soft guideline; it's a hard ceiling.
+
+**Target 80-120 lines.** This leaves room for growth without constant pruning.
+
+When approaching the budget:
+1. Extract multi-line blocks to topic files (most common fix)
+2. Compress remaining entries to one-liners under 150 characters
+3. Remove anything duplicated in CLAUDE.md or reference files (one source of truth)
+4. Delete entries for completed projects, departed people, or resolved issues
+5. Check for dead links -- topic files that were deleted but still referenced
+
+### The 25KB Byte Cap
+
+A separate 25KB byte limit covers edge cases with long lines. If individual entries are very long (URLs, code snippets), they can hit this before the 200-line limit. Keep entries concise.
 
 ---
 

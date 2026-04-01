@@ -6,9 +6,11 @@ How to keep AI sessions productive as context grows.
 
 ## The Problem
 
-AI context windows are large but not infinite. Every file you read, every tool result you pull in, every long response — it all accumulates. When context fills up, older information gets compressed or dropped. Quality degrades.
+AI context windows are large but not infinite. Every file you read, every tool result you pull in, every long response -- it all accumulates. When the token count hits ~167,000, auto-compaction fires: everything gets compressed into a ~50,000-token summary, only 5 files are retained in full, and every file read, reasoning chain, and intermediate decision is discarded.
 
-Context hygiene is the practice of being intentional about what enters your AI session.
+The AI doesn't know this happened. It continues working from a lossy summary, which is the root cause of "it understood this perfectly 5 minutes ago, now it's hallucinating." This is not a bug. It's the architecture.
+
+Context hygiene is the practice of being intentional about what enters your session to delay compaction and minimize information loss when it does fire.
 
 ## The Core Rule
 
@@ -39,9 +41,14 @@ Meeting transcripts are the worst offenders — they're long, mostly noise, and 
 **Instead:** Always delegate transcript processing: "Extract action items and decisions from this transcript."
 
 ### Accumulated Conversation History
-Long sessions accumulate responses, tool results, and back-and-forth. The AI starts losing its grip on early context.
+Long sessions accumulate responses, tool results, and back-and-forth. Past message 15 in a long session, the agent may be working from a lossy summary of your conversation rather than the actual content.
 
-**Instead:** Restart sessions after 2-3 major tasks. Save state to session notes.
+**Instead:** Restart sessions after 2-3 major tasks (coding) or when you've read 10+ files (strategic/research work). Save state to session notes.
+
+### Strategic and Research Work
+Strategic work (writing, research, analysis) is especially vulnerable to context bloat because it reads more diverse sources per task than coding. A single pitch-writing session might pull in transcripts, reference files, prior drafts, Notion pages, and Slack threads -- easily 15+ sources. Each one adds to the token count, and compaction treats all of them equally when it fires.
+
+**Instead:** Be deliberate about which sources enter main context. Read the draft you're editing directly. Delegate everything else (transcripts, Notion pages, prior art) to sub-agents that extract only what's relevant.
 
 ## The Delegation Pattern
 
@@ -153,12 +160,14 @@ This gives you control over when and how much of the output enters main context.
 ### During Session
 4. Read files you're editing directly
 5. Delegate heavy reads to sub-agents
-6. Restart after 2-3 major tasks
+6. Track context weight (files read, sources consulted)
+7. For coding: restart after 2-3 major tasks
+8. For strategic/research work: restart after reading 10+ files or 60+ minutes of deep work
 
 ### End of Session
-7. Save session notes (what was done, what's next)
-8. Update reference files if new context was discovered
-9. Update memory if stable patterns emerged
+9. Save session notes (what was done, what's next)
+10. Update reference files if new context was discovered
+11. Update memory if stable patterns emerged
 
 ---
 
@@ -169,13 +178,27 @@ Signs your context is healthy:
 - Responses stay consistent with established patterns
 - No re-explanation needed
 
-Signs your context is bloated:
-- AI suggests approaches different from what you established
+Signs compaction may have fired:
+- AI suggests approaches that contradict what you established earlier
+- AI re-asks questions it already answered
+- AI "forgets" files it read 10 minutes ago
+- Response quality drops suddenly (not gradually)
 - Having to re-explain things covered earlier
-- Response quality declining
-- More back-and-forth to get correct output
 
-When you notice bloat: save state, restart session, load clean context.
+When you notice these signals: save state, restart session, load clean context. Continuing a compacted session compounds the problem -- each subsequent compaction is lossier than the last.
+
+## Hard Limits to Know
+
+These limits are built into Claude Code and affect how you should structure your work:
+
+| Limit | Value | Impact |
+|-------|-------|--------|
+| File read cap | 2,000 lines / 25,000 tokens per read | Content past line 2,000 is silently cut |
+| Tool result truncation | >50,000 chars cut to 2,000-byte preview | Broad searches silently lose results |
+| Auto-compaction trigger | ~167,000 tokens | Destroys all file reads and reasoning chains |
+| Compaction retention | 5 files at 5K tokens each + 50K summary | Everything else is gone |
+| MEMORY.md | 200 lines / 25KB max | Silent truncation; AI doesn't know what was cut |
+| Memory retrieval | Max 5 files per turn | Filename-based matching, not semantic search |
 
 ---
 
