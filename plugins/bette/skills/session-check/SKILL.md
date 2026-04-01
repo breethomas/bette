@@ -45,16 +45,24 @@ Evaluate these signals by reviewing the conversation so far:
 - 2-3 tasks: consider saving notes
 - 4+ tasks: strongly recommend restart
 
-**Context signals:**
+**Context weight (source diversity):**
+- Count how many distinct files/sources have been read this session (file reads, Notion pages, Slack threads, tool results)
+- Under 5 sources: low pressure
+- 5-10 sources: moderate pressure
+- 10+ sources: high pressure, regardless of task count
+
+**Compaction signals:**
 - Has Claude had to re-read files it already read earlier?
 - Has Claude suggested approaches that contradict earlier decisions?
 - Has the user had to re-explain things covered earlier?
 - Are responses getting longer or more verbose (a sign of context pressure)?
+- Did Claude suddenly "forget" something it knew 5 minutes ago? (compaction may have fired)
 
-**Work type:**
-- Coding sessions: more context-intensive, restart sooner
-- Writing/editing sessions: can run longer
-- Mixed sessions: restart sooner
+**Work type profiles:**
+- Coding sessions: moderate source diversity, restart after 2-3 tasks
+- Strategic/research/writing sessions: HIGH source diversity (transcripts, reference files, prior drafts, Notion pages, Slack threads). These hit compaction faster with fewer completed "tasks." Weight context pressure more heavily than task count.
+- Meeting prep/inbox triage: high source diversity but each item is self-contained. Task count is a reasonable trigger.
+- Mixed sessions: use whichever trigger fires first
 
 ### Step 2: Report the Assessment
 
@@ -65,6 +73,8 @@ Present the assessment clearly:
  SESSION HEALTH
 
  Tasks completed:     [N]
+ Sources read:        [N files/pages/threads]
+ Work type:           [Coding / Strategic / Mixed]
  Context pressure:    [Low / Medium / High]
  Recommendation:      [Continue / Save notes & continue / Save notes & restart]
 
@@ -75,9 +85,9 @@ Present the assessment clearly:
 
 **Recommendation logic:**
 
-- **Continue** — 1 task done, no context pressure signals, work is coherent
-- **Save notes & continue** — 2-3 tasks done, session is still coherent but should capture state as insurance
-- **Save notes & restart** — 4+ tasks done, OR context pressure signals present, OR user reports quality decline
+- **Continue** -- 1 task done, under 5 sources, no compaction signals, work is coherent
+- **Save notes & continue** -- 2-3 tasks done OR 5-10 sources read, session is still coherent but should capture state as insurance
+- **Save notes & restart** -- 4+ tasks done, OR 10+ sources read, OR compaction signals present, OR user reports quality decline
 
 ### Step 3: Generate Session Notes
 
@@ -161,14 +171,20 @@ Options:
 
 ## Proactive Invocation
 
-Claude should suggest this skill after completing 2-3 major tasks in any session, even if the user does not invoke it. Use a light touch:
+Claude should suggest this skill when ANY of these triggers fire, even if the user does not invoke it:
+
+- **Task trigger:** 2-3 major tasks completed
+- **Source trigger:** 10+ distinct files/pages/threads read in the session
+- **Compaction trigger:** Claude notices it has "forgotten" something it knew earlier, or the user has to re-explain
+
+Use a light touch:
 
 ```
-We've completed [N] tasks this session. Want to save session
-notes before continuing? (/session-check)
+We've completed [N] tasks and read [N] sources this session.
+Want to save session notes before continuing? (/session-check)
 ```
 
-Do not nag. Suggest once. If the user declines, continue working.
+Do not nag. Suggest once per trigger threshold. If the user declines, continue working.
 
 ## Rules
 

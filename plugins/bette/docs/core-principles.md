@@ -168,15 +168,21 @@ Skills should get leaner over time, not fatter. The goal is to encode your judgm
 
 ## Session Management
 
-Context rot is real. AI assistants lose coherence over long sessions. Managing sessions is as important as managing the work itself.
+Context rot is real. Auto-compaction fires at ~167,000 tokens, compressing everything into a lossy summary. The AI doesn't know it happened. Managing sessions is as important as managing the work itself.
 
 ### When to Restart
 
-**After 2-3 major tasks, or when you notice:**
+The trigger depends on the type of work:
+
+**Coding sessions** -- restart after 2-3 major tasks. Coding sessions tend to be focused on a small number of files, so context pressure builds slowly.
+
+**Strategic/research/writing sessions** -- restart after reading 10+ diverse sources or after 60+ minutes of deep work. These sessions read more files per task (transcripts, reference docs, prior drafts, Notion pages, Slack threads) and hit compaction faster than coding sessions with fewer completed "tasks."
+
+**Any session** -- restart when you notice:
 - AI suggesting approaches different from what you established
 - Having to re-explain things covered earlier
-- Output quality declining
-- More errors or back-and-forth
+- AI "forgetting" files it read recently (a sign compaction fired)
+- Output quality dropping suddenly rather than gradually
 
 ### Before Restarting: Capture State
 
