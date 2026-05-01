@@ -34,16 +34,15 @@ Run email and Slack processing in parallel using the Agent tool. Each agent runs
 **Email agent:**
 Launch an Agent (`subagent_type: general-purpose`) with this prompt:
 
-> You are processing {PM Name}'s Gmail inbox. Follow these steps:
+> You are processing {PM Name}'s email inbox. Prefer Superhuman MCP (`mcp__claude_ai_Superhuman_Mail__*`); fall back to Gmail MCP (`mcp__claude_ai_Gmail__*`) only if Superhuman is disconnected. Follow these steps:
 >
 > 1. Read `{Home Directory}/reference/people.md` for name resolution
 > 2. Read `{Home Directory}/email/.processed-inbox` (create if it doesn't exist) for already-processed IDs
-> 3. Call `mcp__claude_ai_Gmail__gmail_get_profile` to confirm the account
-> 4. Search Gmail with `mcp__claude_ai_Gmail__gmail_search_messages` using query `is:starred OR (is:unread -category:promotions -category:social -category:updates)`, maxResults 30
-> 5. Filter out any messageIds already in `.processed-inbox`
-> 6. For remaining items, read threads with `mcp__claude_ai_Gmail__gmail_read_thread` to get conversation context
-> 7. Categorize each item as: Respond (waiting on {PM Name}), Action (to-do outside email), FYI (informational), or Stale (old/resolved)
-> 8. Write results to `{Home Directory}/drafts/catchup-email.md` in this format:
+> 3. Search via Superhuman: `mcp__claude_ai_Superhuman_Mail__query_email_and_calendar` for starred + unread mail (exclude promotions/social/updates), maxResults 30. Fallback: Gmail `gmail_search_messages` with query `is:starred OR (is:unread -category:promotions -category:social -category:updates)`
+> 4. Filter out any messageIds already in `.processed-inbox`
+> 5. For remaining items, read threads via Superhuman `get_thread` (Gmail `gmail_read_thread` as fallback) to get conversation context
+> 6. Categorize each item as: Respond (waiting on {PM Name}), Action (to-do outside email), FYI (informational), or Stale (old/resolved)
+> 7. Write results to `{Home Directory}/drafts/catchup-email.md` in this format:
 >
 > ```
 > # Email Inbox — [Date]
@@ -151,8 +150,10 @@ Walk through items with {PM Name}, starting with "Respond" category across both 
 
 **For email items:**
 - Read the full thread if needed (delegate to sub-agent for long threads)
-- Draft a reply via `mcp__claude_ai_Gmail__gmail_create_draft`
+- Draft a reply via `mcp__claude_ai_Superhuman_Mail__create_or_update_draft` (Gmail `gmail_create_draft` as fallback)
 - Show draft text for approval before creating
+- For obvious newsletter FYI items, offer `mcp__claude_ai_Superhuman_Mail__unsubscribe` as one-shot cleanup
+- For stale items, offer `mcp__claude_ai_Superhuman_Mail__trash_thread` to remove from inbox
 
 **For Slack items:**
 - Read the full thread if needed (delegate to sub-agent)
@@ -162,7 +163,7 @@ Walk through items with {PM Name}, starting with "Respond" category across both 
 
 **For action items (both channels):**
 - Append to `{Home Directory}/BACKLOG.md` under appropriate priority section
-- Format: `- **[Brief description]** — [context]. [Source: Gmail/Slack permalink if available]`
+- Format: `- **[Brief description]** — [context]. [Source: email/Slack permalink if available]`
 
 **For FYI/stale items:**
 - Mark as processed after confirmation
@@ -192,15 +193,16 @@ Only add items that were actually triaged. Deferred items stay off the list.
 - Deferred: [N] items (will appear next catchup)
 
 Drafts to review:
-- Gmail: [N] drafts waiting in Gmail
+- Email: [N] drafts waiting in Superhuman (or Gmail if fallback was used)
 - Slack: [N] drafts waiting in Slack "Drafts & Sent"
 ```
 
 ## Error Handling
 
-- If Gmail MCP is not connected: skip email, note it, proceed with Slack only
+- If Superhuman MCP is disconnected: fall back to Gmail MCP for email
+- If both email MCPs are unavailable: skip email, note it, proceed with Slack only
 - If Slack MCP is not connected: skip Slack, note it, proceed with email only
-- If both are unavailable: tell {PM Name} neither integration is available
+- If all are unavailable: tell {PM Name} no integrations are available
 - If one agent fails: present results from the successful one, note the failure, offer to retry
 - If a draft file wasn't written by a sub-agent: report what happened and offer to run that channel manually
 
