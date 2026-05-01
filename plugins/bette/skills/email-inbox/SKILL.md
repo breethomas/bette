@@ -20,13 +20,15 @@ Read these first:
 
 - **List / search:** `mcp__claude_ai_Superhuman_Mail__query_email_and_calendar` (cross-search with calendar) or `list_threads`
 - **Read:** `get_message` (single), `get_thread` (conversation)
-- **Draft:** `create_or_update_draft` — always draft, never send automatically
+- **Draft:** `create_or_update_draft` — stage the message
+- **Send:** `send_draft` — only after {PM Name} explicitly approves the draft text in chat
+- **Recall:** `undo_send` — Superhuman's recall window safety net if a send goes wrong
 - **Follow-up signals:** `get_read_statuses` — check whether recipients have opened {PM Name}'s earlier outbound emails (useful for prioritizing who to re-ping)
-- **Inbox hygiene:** `unsubscribe` (for newsletter-style FYI items), `trash_thread` (for stale items), `mark_spam` (for obvious spam)
+- **Inbox hygiene:** `unsubscribe` (for newsletter-style FYI items), `trash_thread` (for stale items), `mark_spam` (for obvious spam), `update_thread` with `mark_done: true` (archive)
 
-**Fallback: Gmail MCP** (`mcp__claude_ai_Gmail__*`) only if Superhuman MCP is disconnected. Gmail retains granular label CRUD, which Superhuman exposes read-only — if {PM Name} asks to add or rename labels mid-triage, use Gmail for that specific operation.
+**Fallback: Gmail MCP** (`mcp__claude_ai_Gmail__*`) only if Superhuman MCP is disconnected. Gmail retains granular label CRUD, which Superhuman exposes read-only — if {PM Name} asks to add or rename labels mid-triage, use Gmail for that specific operation. Gmail MCP cannot send — drafts only when on fallback.
 
-- **Drafts only:** never auto-send. {PM Name} reviews and sends from Superhuman.
+- **Confirmation gate:** show every draft inline before any send. Send only after {PM Name} says "send" / "looks good" / "ship it" / similar explicit go. If {PM Name} says "draft only" / "stage it" / "save it for later", create the draft and stop — do not send.
 - **Plain text default:** use plain text unless asked for HTML formatting.
 
 ## Priority Hierarchy
@@ -75,9 +77,12 @@ Present items grouped by category, most actionable first. Then ask: "Want to wal
 1. Read the full thread if needed (delegate to sub-agent for long threads)
 2. If {PM Name} has sent earlier outbound mail in this thread, consider checking `get_read_statuses` before drafting — if the recipient hasn't opened the previous message, the reply strategy may differ (e.g., forward + nudge vs. assume context)
 3. Draft a response matching {PM Name}'s voice: direct, concise, no fluff
-4. Show the draft text before creating it
-5. After approval, create draft via `mcp__claude_ai_Superhuman_Mail__create_or_update_draft` (Gmail `gmail_create_draft` as fallback)
-6. Tell {PM Name} the draft is in Superhuman drafts — review and send from there
+4. Show the draft text inline (recipient, subject, body) before any tool call
+5. Wait for {PM Name}'s explicit decision:
+   - **"Send" / "looks good" / "ship it" / similar:** call `mcp__claude_ai_Superhuman_Mail__create_or_update_draft`, then immediately `mcp__claude_ai_Superhuman_Mail__send_draft`. Confirm sent. Mention `undo_send` is available if {PM Name} catches a regret in the recall window.
+   - **"Draft only" / "stage it" / "save it" / "let me edit":** call only `create_or_update_draft`. Tell {PM Name} the draft is staged in Superhuman.
+   - **Edits requested:** revise the draft inline, show again, loop until approved.
+6. On Gmail fallback: stage draft only — Gmail MCP cannot send. Tell {PM Name} to send from Gmail UI.
 
 **Action items:**
 1. Append to `{Home Directory}/BACKLOG.md` under the appropriate priority section
@@ -103,17 +108,17 @@ This includes ALL items that were presented and triaged. Do not skip this step. 
 ### 8. Summary
 
 After processing all items:
-- [N] responses drafted (check Superhuman drafts to review and send)
+- [N] responses sent
+- [N] responses staged as drafts (waiting in Superhuman)
 - [N] items added to backlog
-- [N] items marked FYI/stale
-- [N] items unsubscribed / trashed
+- [N] items archived / trashed / unsubscribed
 - [N] items deferred (will appear next time)
 
 ## Sub-agent Delegation Rules
 
 All email search and read operations MUST go through sub-agents. This keeps raw email API output out of main context.
 
-**Exception:** `create_or_update_draft`, `unsubscribe`, `trash_thread`, `mark_spam`, and `get_read_statuses` calls can stay in main context — they are small write/read operations.
+**Exception:** `create_or_update_draft`, `send_draft`, `undo_send`, `unsubscribe`, `trash_thread`, `mark_spam`, `update_thread`, and `get_read_statuses` calls can stay in main context — they are small write/read operations.
 
 ## Error Handling
 

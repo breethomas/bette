@@ -150,10 +150,14 @@ Walk through items with {PM Name}, starting with "Respond" category across both 
 
 **For email items:**
 - Read the full thread if needed (delegate to sub-agent for long threads)
-- Draft a reply via `mcp__claude_ai_Superhuman_Mail__create_or_update_draft` (Gmail `gmail_create_draft` as fallback)
-- Show draft text for approval before creating
+- Draft a reply matching {PM Name}'s voice and show inline (recipient, subject, body)
+- Wait for explicit decision:
+  - **"Send" / "ship it":** `create_or_update_draft` then `send_draft`. Confirm sent. Note `undo_send` available in recall window.
+  - **"Draft only" / "stage it":** `create_or_update_draft` and stop.
+  - **Edits:** revise inline, show again, loop until approved.
+- Gmail fallback: drafts only (Gmail MCP cannot send)
 - For obvious newsletter FYI items, offer `mcp__claude_ai_Superhuman_Mail__unsubscribe` as one-shot cleanup
-- For stale items, offer `mcp__claude_ai_Superhuman_Mail__trash_thread` to remove from inbox
+- For stale items, offer `mcp__claude_ai_Superhuman_Mail__trash_thread` or `update_thread` mark_done to archive
 
 **For Slack items:**
 - Read the full thread if needed (delegate to sub-agent)
@@ -188,7 +192,7 @@ Only add items that were actually triaged. Deferred items stay off the list.
 ```
 ## Catchup Complete
 
-- Email: [N] drafted, [N] to backlog, [N] cleared
+- Email: [N] sent, [N] staged as drafts, [N] to backlog, [N] cleared
 - Slack: [N] drafted, [N] to backlog, [N] cleared
 - Deferred: [N] items (will appear next catchup)
 
