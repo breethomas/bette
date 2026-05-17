@@ -11,9 +11,9 @@ description: >
 
 Load these into context before responding:
 
-- `frameworks/ai/ai-evals.md` — eval methodology overview
-- `frameworks/ai/pm-friendly-evals-guide.md` — Aman Khan / Hamel Husain PM-friendly evals
-- `thought-leaders/aman-khan.md` — Aman's perspective on PM-owned evals
+- `../../frameworks/ai/ai-evals.md` — eval methodology overview
+- `../../frameworks/ai/pm-friendly-evals-guide.md` — Aman Khan / Hamel Husain PM-friendly evals
+- `../../thought-leaders/aman-khan.md` — Aman's perspective on PM-owned evals
 
 Help the user evaluate a RAG pipeline. Separate retrieval quality (Recall@k, Precision@k, MRR, NDCG@k) from generation quality (faithfulness, relevance). The two failure modes are different — measure them separately so the fix lands on the right side of the pipeline.
 

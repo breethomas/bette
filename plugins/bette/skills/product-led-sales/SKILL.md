@@ -8,16 +8,16 @@ user-invocable: true
 
 Load these into context before responding:
 
-- `frameworks/growth/product-led-sales.md` — Verna's PLS framework
-- `thought-leaders/elena-verna.md` — Verna's broader perspective on motions (PLG, MLG, SLG) and levers
+- `../../frameworks/growth/product-led-sales.md` — Verna's PLS framework
+- `../../thought-leaders/elena-verna.md` — Verna's broader perspective on motions (PLG, MLG, SLG) and levers
 
 Help the user think through when and how to layer sales onto a product-led motion. They may be diagnosing whether to add sales now, sizing the opportunity, or designing the seam between product signals and sales action. Adapt to the question.
 
 ## When to load adjacent context
 
-- Growth loops are in scope → also load `frameworks/growth/growth-loops.md`
-- Channel-model fit is the question → also load `frameworks/growth/four-fits.md`
-- Pricing/packaging is in scope → also load `frameworks/growth/pricing-strategy.md`
+- Growth loops are in scope → also load `../../frameworks/growth/growth-loops.md`
+- Channel-model fit is the question → also load `../../frameworks/growth/four-fits.md`
+- Pricing/packaging is in scope → also load `../../frameworks/growth/pricing-strategy.md`
 
 ## Avoid
 

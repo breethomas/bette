@@ -11,9 +11,9 @@ description: >
 
 Load these into context before responding:
 
-- `frameworks/ai/ai-evals.md` — eval methodology overview
-- `frameworks/ai/pm-friendly-evals-guide.md` — Aman Khan / Hamel Husain PM-friendly evals
-- `thought-leaders/aman-khan.md` — Aman's perspective on PM-owned evals
+- `../../frameworks/ai/ai-evals.md` — eval methodology overview
+- `../../frameworks/ai/pm-friendly-evals-guide.md` — Aman Khan / Hamel Husain PM-friendly evals
+- `../../thought-leaders/aman-khan.md` — Aman's perspective on PM-owned evals
 
 Help the user generate diverse synthetic test inputs using dimension-based tuple generation. Identify the dimensions of variation that matter (e.g., user intent, content complexity, edge cases, adversarial inputs), then generate combinations across those dimensions.
 

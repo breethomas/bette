@@ -26,4 +26,4 @@ Apply this to whatever the user wants to improve — a PRD, a Slack message, a r
 
 ## Source
 
-Andrej Karpathy's autoresearch framing. No dedicated framework doc in the plugin yet — a TODO to add `thought-leaders/andrej-karpathy.md` and a proper framework writeup.
+Andrej Karpathy's autoresearch framing. No dedicated framework doc in the plugin yet — a TODO to add `../../thought-leaders/andrej-karpathy.md` and a proper framework writeup.

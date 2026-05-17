@@ -7,8 +7,8 @@ description: PM memory architecture for Claude Code — how to structure CLAUDE.
 
 Load these into context before responding:
 
-- `frameworks/ai-era-practices/pm-memory-architecture.md` — editorial discipline framework
-- `docs/memory-systems.md` — Claude Code memory mechanics
+- `../../frameworks/ai-era-practices/pm-memory-architecture.md` — editorial discipline framework
+- `../../docs/memory-systems.md` — Claude Code memory mechanics
 
 Help the user structure their PM memory setup or audit an existing one. They may be doing first-time setup, debugging a memory pattern that's not working, or thinking through where new context belongs. Adapt to the situation.
 
@@ -16,7 +16,7 @@ Help the user structure their PM memory setup or audit an existing one. They may
 
 - The user is just getting started with Bette → flag `/bette-setup`
 - The user is auditing an existing setup → flag `/bette-health`
-- Context engineering is the broader question → also load `frameworks/ai-era-practices/context-engineering.md`
+- Context engineering is the broader question → also load `../../frameworks/ai-era-practices/context-engineering.md`
 
 ## Avoid
 

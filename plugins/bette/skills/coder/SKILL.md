@@ -7,8 +7,8 @@ description: Apply Brian Balfour's CODER framework to drive organizational AI ad
 
 Load these into context before responding:
 
-- `frameworks/ai-era-practices/organizational-ai-adoption.md` — Balfour's CODER framework
-- `thought-leaders/brian-balfour.md` — Balfour's perspective on AI-era org change
+- `../../frameworks/ai-era-practices/organizational-ai-adoption.md` — Balfour's CODER framework
+- `../../thought-leaders/brian-balfour.md` — Balfour's perspective on AI-era org change
 
 Help the user apply CODER (Constraints, Ownership, Directives, Expectations, Rewards) to their org's AI adoption challenge. They may be designing a rollout, diagnosing why adoption stalled, or planning the next phase. Adapt to the situation.
 

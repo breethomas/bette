@@ -12,9 +12,9 @@ description: >
 
 Load these into context before responding:
 
-- `frameworks/ai/ai-evals.md` — eval methodology overview
-- `frameworks/ai/pm-friendly-evals-guide.md` — Aman Khan / Hamel Husain PM-friendly evals
-- `thought-leaders/aman-khan.md` — Aman's perspective on PM-owned evals
+- `../../frameworks/ai/ai-evals.md` — eval methodology overview
+- `../../frameworks/ai/pm-friendly-evals-guide.md` — Aman Khan / Hamel Husain PM-friendly evals
+- `../../thought-leaders/aman-khan.md` — Aman's perspective on PM-owned evals
 
 Help the user build one LLM-as-Judge evaluator for one specific failure mode. Binary pass/fail. Anchor to the framework — don't reinvent the methodology.
 
