@@ -189,6 +189,7 @@ This is the kind of meta-rule that goes in CLAUDE.md if it shapes every response
 
 ## Resources
 
+- [`docs/personalization.md`](../../docs/personalization.md) — how to tune Bette to your seniority and style via CLAUDE.md (the practical companion to this framework)
 - [Claude Code memory docs](https://code.claude.com/docs/en/memory) — canonical reference for native primitives
 - [`docs/memory-systems.md`](../../docs/memory-systems.md) — Bette's mechanics doc, complements this framework
 - [Auto Dream blog](https://claudefa.st/blog/guide/mechanics/auto-dream) — between-session memory consolidation

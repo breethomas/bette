@@ -137,7 +137,7 @@ Context engineering.
 
 **4 templates**: AI product spec, lite PRD, Linear issue, competitive analysis.
 
-**Architecture docs** in `docs/`. Covers preferences files, reference files, memory systems, context hygiene, skill architecture.
+**Architecture docs** in `docs/`. Covers preferences files, reference files, memory systems, context hygiene, skill architecture, and personalization (how to tune Bette to your seniority and style via CLAUDE.md).
 
 Bette positions itself as editorial discipline on top of Claude Code's native memory primitives (CLAUDE.md hierarchy, @imports, auto-memory, Auto Dream), not a replacement. The PM memory architecture framework in `frameworks/ai-era-practices/` is where that gets articulated.
 
