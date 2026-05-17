@@ -2,7 +2,7 @@
 
 > "Attempt the impossible in order to improve your work." — Bette Davis
 
-A PM operating system for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). 55 skills, 7 autonomous agents, 31 PM frameworks. One install.
+A PM operating system for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). 56 skills, 7 autonomous agents, 32 PM frameworks. One install.
 
 Named after Bette Davis, who sued a studio because they wouldn't give her better roles.
 
@@ -81,6 +81,7 @@ Strategic sparring grounded in Cagan, Torres, Verna, Balfour, Singer, Husain, an
 | "plan the agency ladder" | v1 → v2 → v3 AI feature progression |
 | "where's the broken fit?" | Balfour's Four Fits |
 | "build a judge for [AI feature]" | LLM-as-judge pipelines |
+| "design the agent workflow for [feature]" | Single agent vs multi-agent decision, sub-agent specs |
 
 ### Operate
 Daily workflow.
@@ -131,7 +132,7 @@ Context engineering.
 
 ## What else is in the box
 
-**31 frameworks** across discovery, planning, growth, execution, measurement, and AI-era practices. Continuous discovery, Shape Up, growth loops, LNO, AI unit economics, PM memory architecture, more.
+**32 frameworks** across discovery, planning, growth, execution, measurement, and AI-era practices. Continuous discovery, Shape Up, growth loops, LNO, AI unit economics, PM memory architecture, agent workflow design, more.
 
 **15 thought leader profiles** (Cagan, Torres, Verna, Balfour, Cherny, Singer, Huyen, Rachitsky, Khan, others).
 
