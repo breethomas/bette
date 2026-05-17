@@ -10,3 +10,13 @@ slack/
 memory/
 .obsidian/
 Screenshot*
+
+# Bree's personal Homebot-specific operational files
+BACKLOG.md
+GOALS.md
+CLAUDE.md
+c3-brief-change-log.md
+mdna-queue.md
+raw-sources/
+reference/
+videos/
