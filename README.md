@@ -2,7 +2,7 @@
 
 > "Attempt the impossible in order to improve your work." — Bette Davis
 
-A PM operating system built on [Claude Code](https://docs.anthropic.com/en/docs/claude-code). 57 skills, 7 autonomous agents, and 24 PM frameworks in one install.
+A PM operating system built on [Claude Code](https://docs.anthropic.com/en/docs/claude-code). 55 skills, 7 autonomous agents, and 31 PM frameworks in one install.
 
 Named after Bette Davis — who sued a studio because they wouldn't give her better roles.
 
@@ -41,7 +41,7 @@ Say **"set me up"** or **"configure bette"** and choose guided setup. Bette asks
 
 - A preferences file (your working style, what you care about)
 - Reference files (your people, your domains, your systems)
-- Backlog, goals, and session management
+- Backlog and session management
 - Automatic bootstrap so every session starts with context
 
 Takes about 5 minutes. Gets you from zero to a working PM operating system.
@@ -76,7 +76,7 @@ End of day:
 ```
 what should I focus on tomorrow?
 ```
-Bette reads your backlog, checks your goals, and surfaces the top 3 things that matter.
+Bette reads your backlog and surfaces what matters.
 
 Just talk to it. Bette figures out which workflow to run.
 
@@ -84,9 +84,9 @@ Just talk to it. Bette figures out which workflow to run.
 
 ---
 
-## Skills (57)
+## Skills
 
-### Think — frameworks that sharpen decisions (30)
+### Think — frameworks that sharpen decisions
 
 Strategic sparring grounded in frameworks from Marty Cagan, Teresa Torres, Elena Verna, Brian Balfour, Ryan Singer, Hamel Husain, and more.
 
@@ -99,13 +99,13 @@ Strategic sparring grounded in frameworks from Marty Cagan, Teresa Torres, Elena
 | "set up evals for [AI feature]" | AI evaluation suite — first 20 test cases |
 | "research competitors in [space]" | Systematic competitor analysis with parallel agents |
 | "plan the agency ladder for [feature]" | v1 → v2 → v3 AI feature progression |
-| "help me design the context architecture" | Layered context engineering for AI workflows |
+| "where's the broken fit?" | Balfour's Four Fits diagnostic |
 | "write a PRD for [feature]" | PRDs with before/after examples |
 | "build a judge for [AI feature]" | LLM-as-judge evaluation pipelines |
 
-And 20 more. Type `/skills` to see everything.
+Type `/skills` to see everything.
 
-### Operate — run your day without losing the plot (22)
+### Operate — run your day without losing the plot
 
 Daily workflows for inbox triage, meeting prep, backlog management, and strategic synthesis.
 
@@ -114,14 +114,14 @@ Daily workflows for inbox triage, meeting prep, backlog management, and strategi
 | "catch me up" | Triage email + Slack in one pass |
 | "process my meetings" | Transcripts into action items, decisions, follow-ups |
 | "prep for my meeting with [name]" | Talk track with topics, context, and questions |
-| "process my backlog" | Categorize, prioritize, connect to goals |
+| "process my backlog" | Categorize, prioritize, connect to themes |
 | "what should I focus on today?" | Top 3 priorities tied to strategic outcomes |
 | "weekly review" | What got done, what didn't, what's coming |
-| "synthesize [meeting/transcript]" | Extract decisions and insights |
+| "audit my Linear" | Workspace, project, or team-level Linear health check |
 
-And 15 more. These work best with integrations (Slack, Gmail, Notion, Linear) but don't require them.
+These work best with integrations (Slack, Gmail, Notion, Linear) but don't require them.
 
-### Work — guardrails that keep quality high (3)
+### Work — guardrails that keep quality high
 
 For PMs who code. Quality gates, test-first patterns, and session management.
 
@@ -131,7 +131,7 @@ For PMs who code. Quality gates, test-first patterns, and session management.
 | "write tests first" | Generate test suites before modifying code |
 | "should I save and restart?" | Check if it's time for session notes |
 
-### Architect — set up and maintain your foundation (2)
+### Architect — set up and maintain your foundation
 
 Context engineering — the infrastructure that makes everything else work.
 
@@ -139,6 +139,7 @@ Context engineering — the infrastructure that makes everything else work.
 |----------|-------------|
 | "set me up" | First-use onboarding — generate your context architecture |
 | "check my setup" | Audit against the maturity model |
+| "how should I structure my memory?" | PM memory architecture — editorial discipline on top of native Claude Code primitives |
 
 ---
 
@@ -162,13 +163,13 @@ Seven specialized agents handle research and analysis autonomously. Skills invok
 
 Beyond skills and agents, Bette includes reference material that skills draw from automatically.
 
-**24 PM frameworks** organized by discipline: discovery, planning, growth, execution, measurement, and AI-era practices. Includes continuous discovery, Shape Up, growth loops, LNO prioritization, AI unit economics, and more.
+**31 PM frameworks** organized by discipline: discovery, planning, growth, execution, measurement, and AI-era practices. Includes continuous discovery, Shape Up, growth loops, LNO prioritization, AI unit economics, PM memory architecture, and more.
 
-**15 thought leader profiles** capturing methodologies from Marty Cagan, Teresa Torres, Elena Verna, Brian Balfour, Boris Cherny, Ryan Singer, Chip Huyen, Lenny Rachitsky, and others. Skills reference these when applying frameworks.
+**15 thought leader profiles** capturing methodologies from Marty Cagan, Teresa Torres, Elena Verna, Brian Balfour, Boris Cherny, Ryan Singer, Chip Huyen, Lenny Rachitsky, Aman Khan, and others. Skills reference these when applying frameworks.
 
 **4 templates** for common PM artifacts: AI product specs, lightweight PRDs, Linear issues, and competitive analysis.
 
-**Architecture docs and examples** covering context engineering patterns: how to structure your preferences file, reference files, memory systems, and context hygiene.
+**Architecture docs and examples** covering context engineering patterns: how to structure your preferences file, reference files, memory systems, and context hygiene. The PM memory architecture framework explicitly positions Bette as editorial discipline on top of Anthropic's native memory primitives (CLAUDE.md hierarchy, @imports, auto-memory, Auto Dream) — not a replacement.
 
 ---
 
@@ -211,12 +212,18 @@ Most people start at Ad Hoc. Setup gets you to Planned in five minutes. Systemat
 
 ## Architecture and Design
 
-The architecture docs are included in the plugin under `docs/`. For deep dives into the design philosophy, the companion repos break out each component:
+The architecture docs are included in the plugin under `docs/`:
 
-- **[bette-architect](https://github.com/breethomas/bette-architect)** — Context engineering: preferences design, reference files, memory systems, context hygiene, skill architecture
-- **[bette-think](https://github.com/breethomas/bette-think)** — PM frameworks and thought leader profiles
-- **[bette-work](https://github.com/breethomas/bette-work)** — Quality principles, maturity model, session management
-- **[bette-os](https://github.com/breethomas/bette-os)** — Daily workflow patterns and operational design
+- **claude-md-architecture.md** — Layered context: global → project → directory
+- **reference-file-design.md** — One-line entries, deep context elsewhere
+- **memory-systems.md** — Mechanics: retrieval, compaction awareness, topic file patterns, the 200-line budget
+- **context-hygiene.md** — Read for editing, delegate for reference
+- **skill-architecture.md** — Forked vs interactive, output routing
+- **core-principles.md** — Maturity model and session management
+
+The deeper philosophy lives in the frameworks under `frameworks/ai-era-practices/`, including the PM memory architecture framework that explains how to layer editorial discipline on top of Claude Code's native primitives.
+
+Earlier in Bette's evolution, this material lived across companion repos (`bette-architect`, `bette-os`, `bette-work`). Those are now archived as historical snapshots — all current canonical thinking lives here in the unified plugin.
 
 ---
 
@@ -232,7 +239,7 @@ Bette handles PM workflows. For codebase comprehension — understanding archite
 
 Bette is open source. PRs welcome — especially new skills, framework additions, and workflow improvements.
 
-Each skill is a single markdown file with a header and instructions. Look at any existing skill for the pattern. New skills should follow the "lean" pattern: triggers, context requirements, quality standards, output format. Trust the model for execution.
+Each skill is a single markdown file with a header and instructions. New skills should follow the lean pattern: a thin loader that pulls in the canonical framework + thought-leader profile and trusts the model to apply them. No prescribed workflows — let the situation drive the response.
 
 ---
 
