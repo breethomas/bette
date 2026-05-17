@@ -28,6 +28,12 @@ Balfour's Four Fits diagnoses growth. Vohra's PMF Survey measures fit. Cagan's F
 
 Bette does not ship process frameworks. Shape Up, Scrum, Kanban, OKRs. Process depends on your team, your stage, your customers, your politics. Your team is yours. Run it how it works.
 
+## Pull, not push
+
+Bette is on-demand. Ask when you're ready. No notifications. No scheduled prep. No overnight queues waiting for you.
+
+Attention is the scarce resource. Pushing work at you before you've decided to engage just pulls focus. Cloud routines exist if you want connector-only flows. Local scheduled tasks exist if you want background prep. Neither is a Bette default.
+
 ---
 
 ## Install
