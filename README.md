@@ -2,29 +2,31 @@
 
 > "Attempt the impossible in order to improve your work." — Bette Davis
 
-A PM operating system for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). 54 skills, 7 autonomous agents, 32 PM frameworks. One install.
+A PM operating system for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). 54 skills, 7 agents, 32 frameworks. One install.
 
 Named after Bette Davis, who sued a studio because they wouldn't give her better roles.
 
 ---
 
-## Who is this for?
+## Who it's for
 
-Product managers using Claude Code who want repeatable workflows instead of ad hoc prompting. Strategic decisions, meeting prep, inbox triage, backlog management, AI evals, spec writing.
+PMs using Claude Code who want repeatable workflows, not ad hoc prompting.
 
-You don't memorize commands. Just say what you need in plain English. Bette picks the right workflow.
+Strategic decisions. Meeting prep. Inbox triage. Backlog. AI evals. Spec writing.
 
-It's opinionated. Expect challenges to fuzzy thinking, requests for evidence, and pressure to talk to users.
+Talk to it in plain English. Bette picks the workflow.
+
+Opinionated. It'll push back.
 
 ---
 
-## What Bette curates (and what it doesn't)
+## What it curates
 
-Bette curates **analytical frameworks** — tools for thinking. Balfour's Four Fits helps you diagnose a growth problem. Vohra's PMF Survey helps you measure product-market fit. Cagan's Four Risks helps you evaluate before you build. Those frameworks travel across teams, products, and stages.
+Bette ships analytical frameworks. Tools for thinking.
 
-Bette deliberately does **not** ship process frameworks — tools for how teams operate. Shape Up, Scrum, Kanban, OKRs, sprint cadences. Process is irreducibly contextual. Team composition, product stage, customer commitments, organizational politics, what's worked before, what hasn't — all of it shapes the right rituals for the team. Bette doesn't know your team. Process belongs in whatever your team has built up that works, not in an opinionated default someone else shipped.
+Balfour's Four Fits diagnoses growth. Vohra's PMF Survey measures fit. Cagan's Four Risks evaluates before you build. These travel.
 
-If you want process help, use your judgment, read the relevant book, and adapt. Bette's job is to sharpen your thinking; running the team is yours.
+Bette does not ship process frameworks. Shape Up, Scrum, Kanban, OKRs. Process depends on your team, your stage, your customers, your politics. Your team is yours. Run it how it works.
 
 ---
 
@@ -35,161 +37,159 @@ If you want process help, use your judgment, read the relevant book, and adapt. 
 /plugin install bette@breethomas
 ```
 
-Start a new session. Say **"set me up"**.
+Start a session. Say **"set me up"**.
 
 ---
 
-## Get Started
+## Get started
 
-Two paths. Same system.
+**Guided.** Say "set me up" and pick guided. Five minutes of questions. You get a preferences file, reference files, backlog, session bootstrap.
 
-**Guided:** Say "set me up" and pick guided. Five minutes of questions. You get a preferences file, reference files, backlog, and a session bootstrap.
-
-**Self-guided:** Say "set me up" and pick self-guided. You get the map and docs. Configure as you go.
+**Self-guided.** Say "set me up" and pick self-guided. Map and docs. Configure as you go.
 
 ---
 
-## What does a session look like?
+## A session
 
 ```
 catch me up
 ```
-Triages email and Slack saves. Drafts replies. Updates the backlog.
+Email and Slack triage. Drafts. Backlog updates.
 
 ```
 prep for my 1:1 with Sarah
 ```
-Talk track from your people file, recent meetings, and open issues.
+Talk track from people file, recent meetings, open issues.
 
 ```
 let's think through the pricing change
 ```
-Sparring partner mode. Frameworks, evidence requests, decision capture.
+Sparring partner. Frameworks, evidence, decisions captured.
 
 ```
 what should I focus on today?
 ```
-Top priorities from your backlog. No more than three.
+Top three. From your backlog.
 
-Just talk to it. Slash commands exist (`/bette:strategy-session`) if you want them. Type `/skills` to see everything.
+Type `/skills` for the full list. Slash commands like `/bette:strategy-session` work if you want them.
 
 ---
 
 ## Skills
 
 ### Think
-Strategic sparring grounded in Cagan, Torres, Verna, Balfour, Husain, Khan, and others.
+Cagan, Torres, Verna, Balfour, Husain, Khan, others.
 
-| Say this | What happens |
+| Say | Get |
 |---|---|
 | "let's think through [problem]" | Conversational decision work |
 | "write a spec for [feature]" | Specs at the right depth |
-| "run four risks on [feature]" | Cagan's value / usability / feasibility / viability |
+| "run four risks on [feature]" | Cagan's four-risk audit |
 | "set up evals for [AI feature]" | First 20 test cases |
-| "research competitors in [space]" | Parallel agent analysis |
-| "plan the agency ladder" | v1 → v2 → v3 AI feature progression |
+| "research competitors in [space]" | Parallel agent research |
+| "plan the agency ladder" | v1, v2, v3 AI feature progression |
 | "where's the broken fit?" | Balfour's Four Fits |
-| "build a judge for [AI feature]" | LLM-as-judge pipelines |
-| "design the agent workflow for [feature]" | Single agent vs multi-agent decision, sub-agent specs |
+| "build a judge" | LLM-as-judge pipeline |
+| "design the agent workflow" | Single vs multi-agent decision |
 
 ### Operate
 Daily workflow.
 
-| Say this | What happens |
+| Say | Get |
 |---|---|
-| "catch me up" | Email + Slack triage |
+| "catch me up" | Email and Slack triage |
 | "process my meetings" | Transcripts to action items |
 | "prep for my meeting with [name]" | Talk track |
-| "process my backlog" | Categorize and prioritize |
-| "weekly review" | What got done, what didn't |
-| "audit my Linear" | Workspace, project, or team-level check |
+| "process my backlog" | Categorized and prioritized |
+| "weekly review" | What shipped, what didn't |
+| "audit my Linear" | Workspace, project, or team check |
 
-Works better with Slack, Gmail, Notion, Linear connected. Skills handle missing integrations gracefully.
+Better with Slack, Gmail, Notion, Linear connected. Works without.
 
 ### Work
 For PMs who code.
 
-| Say this | What happens |
+| Say | Get |
 |---|---|
 | "run quality gates" | Pre-commit checklist |
-| "write tests first" | Test suites before modifying code |
+| "write tests first" | Test suites before edits |
 
 ### Architect
 Context engineering.
 
-| Say this | What happens |
+| Say | Get |
 |---|---|
 | "set me up" | First-use onboarding |
-| "how should I structure my memory?" | PM memory architecture, editorial discipline on top of native Claude Code primitives |
+| "how should I structure my memory?" | PM memory architecture |
 
 ---
 
 ## Agents
 
-| Agent | What it does |
+| Agent | Job |
 |---|---|
 | Project health checker | Single project deep-dive |
 | Linear workspace analyzer | Workspace methodology check |
 | Team organization analyzer | Team conventions |
 | Competitor researcher | One competitor, full depth |
 | AI cost analyzer | AI feature economics |
-| AI implementation auditor | Pre-launch readiness, 6 dimensions |
-| Eval generator | AI test cases and frameworks |
+| AI implementation auditor | Pre-launch readiness |
+| Eval generator | Test cases and frameworks |
 
 ---
 
-## What else is in the box
+## What else
 
-**32 frameworks** across discovery, planning, growth, execution, measurement, and AI-era practices. Continuous discovery, Shape Up, growth loops, LNO, AI unit economics, PM memory architecture, agent workflow design, more.
+**32 frameworks** across discovery, planning, growth, execution, measurement, AI-era practices.
 
-**14 thought leader profiles** (Cagan, Torres, Verna, Balfour, Cherny, Huyen, Rachitsky, Khan, Gupta, Vohra, Mehta, Bastow, Reforge, Linear Method).
+**14 thought leaders** (Cagan, Torres, Verna, Balfour, Cherny, Huyen, Rachitsky, Khan, Gupta, Vohra, Mehta, Bastow, Reforge, Linear Method).
 
-**4 templates**: AI product spec, lite PRD, Linear issue, competitive analysis.
+**4 templates**: AI spec, lite PRD, Linear issue, competitive analysis.
 
-**Architecture docs** in `docs/`. Covers preferences files, reference files, memory systems, context hygiene, skill architecture, and personalization (how to tune Bette to your seniority and style via CLAUDE.md).
+**Architecture docs** in `docs/`: preferences, reference files, memory, context hygiene, skill architecture, personalization.
 
-Bette positions itself as editorial discipline on top of Claude Code's native memory primitives (CLAUDE.md hierarchy, @imports, auto-memory, Auto Dream), not a replacement. The PM memory architecture framework in `frameworks/ai-era-practices/` is where that gets articulated.
-
----
-
-## Connecting Your Tools
-
-Optional. Set up when ready.
-
-- **Linear**: `claude mcp add linear`
-- **Slack / Gmail / Notion**: connect via Claude.ai → Integrations
+Bette is editorial discipline on top of Claude Code's native memory. Not a replacement. The PM memory architecture framework in `frameworks/ai-era-practices/` explains how.
 
 ---
 
-## Maturity Model
+## Integrations
 
-Ask Claude to audit your setup against the framework (`how should I structure my memory?` triggers the memory-architecture skill, which loads the editorial discipline rules).
+Optional.
 
-| Level | What it looks like |
+- Linear: `claude mcp add linear`
+- Slack / Gmail / Notion: connect via Claude.ai → Integrations
+
+---
+
+## Maturity
+
+Four levels. Ask Claude to audit your setup.
+
+| Level | Looks like |
 |---|---|
-| **Ad Hoc** | No context. Every session starts cold. |
-| **Planned** | Reference files exist. Sessions start warm. |
-| **Systematic** | Skills define quality standards. System knows your patterns. |
-| **Optimized** | You steer. The system drives. It knows you. |
+| Ad Hoc | No context. Sessions start cold. |
+| Planned | Reference files exist. Sessions start warm. |
+| Systematic | Skills define quality. The system knows your patterns. |
+| Optimized | You steer. It drives. It knows you. |
 
-Setup gets you to Planned in five minutes. Systematic comes from daily use. Optimized is when the system needs less from you, not more.
+Setup gets you to Planned in five minutes. The rest comes from daily use.
 
 ---
 
 ## History
 
-Earlier in Bette's evolution, this material lived across companion repos (`bette-architect`, `bette-os`, `bette-work`). Those are archived. All current canonical thinking is in this repo.
+Earlier versions lived across `bette-architect`, `bette-os`, `bette-work`. All archived. Everything's here now.
 
 ---
 
 ## Contributing
 
-PRs welcome. New skills, framework additions, workflow improvements.
+PRs welcome. New skills, frameworks, workflow improvements.
 
-Each skill is a single markdown file. Follow the lean loader pattern: pull in the canonical framework and thought-leader profile, trust the model to apply them, no prescribed workflows.
+Skills are single markdown files. Lean loader pattern: load the framework and thought-leader profile, trust the model, no prescribed steps.
 
 ---
 
-MIT License. Built with Claude Code by [Bree Thomas](https://github.com/breethomas).
+MIT. Built with Claude Code by [Bree Thomas](https://github.com/breethomas).
 
 Fasten your seatbelts.
