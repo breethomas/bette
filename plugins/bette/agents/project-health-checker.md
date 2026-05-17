@@ -234,7 +234,7 @@ Did you mean one of these?
 - [similar project 1]
 - [similar project 2]
 
-Or you can run /linear-calibrate to see all projects.
+Or you can run /linear-audit to see all projects.
 ```
 
 ### Very Large Project (150+ issues)

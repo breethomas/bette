@@ -570,7 +570,7 @@ Invoke the full 4D Context Canvas walkthrough:
 - **D3 Discovery:** How to fetch context at runtime
 - **D4 Defense:** Pre-checks, post-checks, fallbacks, feedback loops
 
-Reference the archived context-engineering skill for the full framework.
+Reference `frameworks/ai-era-practices/context-engineering.md` for the full framework.
 
 ### --deep examples
 Expand behavior examples to 15-25:

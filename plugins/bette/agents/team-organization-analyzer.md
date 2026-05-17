@@ -174,7 +174,7 @@ Based on what you've seen, here are questions you might want to ask:
 - "Show me issues without descriptions that are in progress"
 
 **Compare projects:**
-- "Run /issue-audit on [another team]" - see if patterns differ
+- "Run /linear-audit on [another team]" - see if patterns differ
 
 ---
 
