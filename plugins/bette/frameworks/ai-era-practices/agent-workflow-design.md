@@ -6,32 +6,32 @@
 
 ## Headline
 
-Most PM problems don't need an agent. They need a single AI call with the right context. Agents earn their cost when the work requires multi-step reasoning, tool use across boundaries, or parallel exploration of a problem space — and even then, the design decisions matter more than the model choice.
+Most PM problems don't need an agent. They need a single AI call with the right context. Agents earn their cost when the work requires multi-step reasoning, tool use across boundaries, or parallel exploration. Even then, design decisions matter more than model choice.
 
-This framework names the patterns, the tradeoffs, and the decision points PMs face when designing agentic workflows.
+This framework names the patterns, the tradeoffs, and the decision points.
 
 ## The first question: do you actually need an agent?
 
-Aakash Gupta's framing is the right starting point: **the core PM skill in 2026 is knowing when to use an agent vs. a simpler AI-node workflow.** Most teams reach for agents too early. They build orchestrators for problems a single prompt could solve, then debate model selection while their evals tell them the problem isn't model capability — it's task design.
+Aakash Gupta's framing: **the core PM skill in 2026 is knowing when to use an agent vs. a simpler AI-node workflow.** Most teams reach for agents too early. They build orchestrators for problems a single prompt could solve, then debate model selection when their evals say the problem is task design, not capability.
 
 Use a single AI call when:
 - The work fits in one round-trip (input in, output out)
 - Tool use is bounded (one or two calls, deterministic)
-- The output structure is known up front
+- Output structure is known up front
 - You don't need the model to plan before executing
 
 Use an agent when:
-- The work requires iterative reasoning (read result, decide next step)
+- Work requires iterative reasoning (read result, decide next step)
 - Tool use is open-ended (the model picks which tools and when)
 - Sub-problems require their own context windows
 - Parallel exploration would compress wall-clock time
 
 Use multi-agent when:
-- The work decomposes cleanly into independent strands
+- Work decomposes cleanly into independent strands
 - Each strand benefits from its own clean context window
 - The orchestrator can verify worker outputs without re-doing the work
 
-The cost asymmetry matters: Anthropic's multi-agent research system used **~15× more tokens than equivalent chat**. It outperformed single-agent by ~90% on the right tasks. On the wrong tasks, it just burns money.
+Cost asymmetry matters. Anthropic's multi-agent research system used **~15× more tokens than equivalent chat**. Outperformed single-agent by ~90% on the right tasks. On the wrong tasks, it burns money.
 
 ## The three patterns
 
@@ -49,11 +49,11 @@ The boring answer. Often the right one. Cheap, fast, easy to evaluate. Use this 
 [Context + objective] → [Agent loop: reason, call tool, observe, repeat] → [Output]
 ```
 
-One model running an agent loop. Picks tools, observes results, decides next step. This is what Claude Code is doing when it reads files, runs grep, edits code. Most workflows live here.
+One model running an agent loop. Picks tools, observes results, decides next step. This is what Claude Code does when it reads files, runs grep, edits code. Most workflows live here.
 
 When to choose this:
-- The work needs multi-step reasoning but doesn't decompose into independent strands
-- Tools are heterogeneous (read file, search web, call API) and the right sequence isn't knowable up front
+- Multi-step reasoning that doesn't decompose into independent strands
+- Heterogeneous tools (read file, search web, call API), right sequence not knowable up front
 - Context fits in one agent's working memory
 
 ### Pattern 3: Multi-agent (orchestrator-worker)
@@ -65,56 +65,56 @@ When to choose this:
               → [Output]
 ```
 
-The pattern Anthropic uses for their multi-agent research system. Lead agent (typically larger model, e.g., Opus) plans and orchestrates. Sub-agents (typically smaller models, e.g., Sonnet) execute scoped tasks in parallel with isolated context windows.
+The pattern Anthropic uses for their multi-agent research system. Lead agent (typically Opus) plans and orchestrates. Sub-agents (typically Sonnet) execute scoped tasks in parallel with isolated context windows.
 
 When to choose this:
-- Independent strands of work that don't need to coordinate mid-flight
-- Parallel research, parallel analysis, parallel verification
+- Independent strands that don't need to coordinate mid-flight
+- Parallel research, analysis, or verification
 - Token cost is justified by wall-clock compression or accuracy lift
 
 When NOT to choose this:
 - Tightly-coupled tasks (each step depends on the previous)
-- The cost asymmetry isn't justified by accuracy or latency wins
-- You haven't first measured what single-agent does on the same task
+- Cost asymmetry isn't justified by accuracy or latency wins
+- You haven't first measured single-agent on the same task
 
 ## Sub-agent specification (the load-bearing skill)
 
-Anthropic's most repeated lesson from the multi-agent research system: **underspecified sub-agents duplicate or skip work.** Specifying a sub-agent well is the difference between a 90% accuracy lift and a 15× token bill with no improvement.
+Anthropic's most repeated lesson: **underspecified sub-agents duplicate or skip work.** Specifying a sub-agent well is the difference between a 90% accuracy lift and a 15× token bill with no improvement.
 
 A sub-agent spec needs four things:
 
-1. **Objective** — what is this sub-agent trying to accomplish, in one sentence? Sharp and bounded. "Research competitor pricing in [space]" — not "do research."
-2. **Output format** — what shape does the result take? Structured markdown? JSON? A specific schema? The orchestrator will need to consume it; tell it how.
-3. **Tool and source guidance** — which tools should it use, which sources should it prefer, which should it avoid? Don't make the sub-agent re-derive your search strategy.
-4. **Clear boundaries** — what is the sub-agent explicitly NOT doing? Where does its scope end and the orchestrator's begin?
+1. **Objective.** What is this sub-agent trying to accomplish, in one sentence? Sharp and bounded. "Research competitor pricing in [space]." Not "do research."
+2. **Output format.** What shape does the result take? Structured markdown? JSON? Specific schema? The orchestrator consumes it. Tell it how.
+3. **Tool and source guidance.** Which tools to use, which sources to prefer, which to avoid. Don't make the sub-agent re-derive your search strategy.
+4. **Clear boundaries.** What is the sub-agent explicitly NOT doing? Where does its scope end?
 
-If a PM is designing a multi-agent workflow, the work is largely in writing these specs cleanly. Model choice, framework choice, infrastructure choice — all downstream of whether the specs are clean.
+If you're designing a multi-agent workflow, the work is largely writing these specs cleanly. Model choice, framework choice, infrastructure choice are all downstream of spec quality.
 
 ## Memory, context, and the attention budget
 
-From Anthropic's "Effective context engineering for AI agents": context is a scarce attention budget, not a free resource. As workflows grow, you have three techniques to keep the budget intact:
+From Anthropic's "Effective context engineering for AI agents": context is a scarce attention budget, not a free resource. Three techniques to keep the budget intact:
 
-1. **Compaction** — summarizing prior history into a compact representation. Used when conversation grows past a useful length.
-2. **Structured note-taking** — sub-agents and orchestrators write to external memory files instead of keeping everything in-window. The plan goes in a file. Intermediate results go in files. Context window stays clean.
-3. **Multi-agent architectures** — specialized sub-agents each get a clean window. The orchestrator never sees the full sub-agent transcript; only its condensed output.
+1. **Compaction.** Summarize prior history into a compact representation. Use when conversation grows past a useful length.
+2. **Structured note-taking.** Sub-agents and orchestrators write to external memory files instead of keeping everything in-window. Plan in a file. Intermediate results in files. Context window stays clean.
+3. **Multi-agent architectures.** Specialized sub-agents each get a clean window. The orchestrator never sees the full sub-agent transcript, only its condensed output.
 
-These techniques compose. A multi-agent workflow with sub-agents writing structured notes and the orchestrator using compaction has a much higher effective ceiling than any single technique alone.
+These compose. A multi-agent workflow with structured notes and orchestrator-level compaction has a much higher effective ceiling than any single technique alone.
 
 ## When multi-agent is the wrong answer
 
 Push back when:
 
-- **The accuracy lift is unproven.** Run the single-agent baseline first. If it's good enough, ship that. Multi-agent is a 15× tax that needs to earn its keep.
-- **The tasks are coupled.** If sub-agent B needs the result of sub-agent A to start, you're not running parallel agents — you're running a sequential pipeline. A single agent does this with less overhead.
+- **The accuracy lift is unproven.** Run the single-agent baseline first. If it's good enough, ship that.
+- **The tasks are coupled.** If sub-agent B needs sub-agent A's result to start, that's not parallel. It's a sequential pipeline. A single agent does this with less overhead.
 - **The orchestrator can't verify worker output.** If the only way to know whether a sub-agent did good work is to redo the work, you've built a fragile system.
-- **The team can't evaluate it.** Multi-agent systems are harder to debug, harder to evaluate, and harder to improve. If you don't have the eval discipline, scope down.
+- **The team can't evaluate it.** Multi-agent is harder to debug, evaluate, and improve. No eval discipline? Scope down.
 
 ## Common failure modes
 
-- **Sub-agent drift.** Worker spec was ambiguous, two sub-agents did overlapping work, one missed its strand entirely.
-- **Orchestrator over-trust.** Lead agent treated sub-agent output as ground truth when it should have spot-checked.
+- **Sub-agent drift.** Worker spec was ambiguous, two sub-agents did overlapping work, one missed its strand.
+- **Orchestrator over-trust.** Lead treated sub-agent output as ground truth instead of spot-checking.
 - **Context bleed.** Orchestrator passed too much of its own context into sub-agents, contaminating the clean-window benefit.
-- **Tool grab-bag.** Sub-agent had access to too many tools, picked the wrong ones, blew its budget on irrelevant calls.
+- **Tool grab-bag.** Sub-agent had access to too many tools, picked wrong ones, blew its budget.
 - **Eval void.** Workflow ships without an eval suite. First production failure is a mystery; second is the same mystery louder.
 - **Premature optimization.** Multi-agent design before the single-agent baseline existed.
 
@@ -137,7 +137,7 @@ Is this a one-shot task?
 
 - Designing a new AI feature and choosing the architecture
 - Diagnosing why an existing agentic workflow is unreliable or expensive
-- Writing the spec for a sub-agent (the load-bearing artifact most teams skip)
+- Writing a sub-agent spec
 - Pushing back on "let's make it multi-agent" when single-agent hasn't been measured
 
 ## Resources
