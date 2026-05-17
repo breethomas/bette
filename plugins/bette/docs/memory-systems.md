@@ -2,6 +2,8 @@
 
 What to persist across sessions and what to let die.
 
+This doc covers the **mechanics** of Claude Code memory: how MEMORY.md retrieval works, how topic files load, what the 200-line cap means in practice. For the **PM editorial layer** that sits on top — reference files via @imports, promotion rules, disambiguation patterns, exec-facing guardrails — see [`frameworks/ai-era-practices/pm-memory-architecture.md`](../frameworks/ai-era-practices/pm-memory-architecture.md).
+
 ---
 
 ## The Problem
