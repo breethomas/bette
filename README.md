@@ -2,7 +2,7 @@
 
 > "Attempt the impossible in order to improve your work." — Bette Davis
 
-A PM operating system for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). 56 skills, 7 autonomous agents, 32 PM frameworks. One install.
+A PM operating system for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). 54 skills, 7 autonomous agents, 32 PM frameworks. One install.
 
 Named after Bette Davis, who sued a studio because they wouldn't give her better roles.
 
@@ -15,6 +15,16 @@ Product managers using Claude Code who want repeatable workflows instead of ad h
 You don't memorize commands. Just say what you need in plain English. Bette picks the right workflow.
 
 It's opinionated. Expect challenges to fuzzy thinking, requests for evidence, and pressure to talk to users.
+
+---
+
+## What Bette curates (and what it doesn't)
+
+Bette curates **analytical frameworks** — tools for thinking. Balfour's Four Fits helps you diagnose a growth problem. Vohra's PMF Survey helps you measure product-market fit. Cagan's Four Risks helps you evaluate before you build. Those frameworks travel across teams, products, and stages.
+
+Bette deliberately does **not** ship process frameworks — tools for how teams operate. Shape Up, Scrum, Kanban, OKRs, sprint cadences. Process is irreducibly contextual. Team composition, product stage, customer commitments, organizational politics, what's worked before, what hasn't — all of it shapes the right rituals for the team. Bette doesn't know your team. Process belongs in whatever your team has built up that works, not in an opinionated default someone else shipped.
+
+If you want process help, use your judgment, read the relevant book, and adapt. Bette's job is to sharpen your thinking; running the team is yours.
 
 ---
 
@@ -68,13 +78,12 @@ Just talk to it. Slash commands exist (`/bette:strategy-session`) if you want th
 ## Skills
 
 ### Think
-Strategic sparring grounded in Cagan, Torres, Verna, Balfour, Singer, Husain, and others.
+Strategic sparring grounded in Cagan, Torres, Verna, Balfour, Husain, Khan, and others.
 
 | Say this | What happens |
 |---|---|
 | "let's think through [problem]" | Conversational decision work |
 | "write a spec for [feature]" | Specs at the right depth |
-| "shape this work" | Shape Up: appetite, solution, risks |
 | "run four risks on [feature]" | Cagan's value / usability / feasibility / viability |
 | "set up evals for [AI feature]" | First 20 test cases |
 | "research competitors in [space]" | Parallel agent analysis |
@@ -111,7 +120,6 @@ Context engineering.
 | Say this | What happens |
 |---|---|
 | "set me up" | First-use onboarding |
-| "check my setup" | Audit against the maturity model |
 | "how should I structure my memory?" | PM memory architecture, editorial discipline on top of native Claude Code primitives |
 
 ---
@@ -134,7 +142,7 @@ Context engineering.
 
 **32 frameworks** across discovery, planning, growth, execution, measurement, and AI-era practices. Continuous discovery, Shape Up, growth loops, LNO, AI unit economics, PM memory architecture, agent workflow design, more.
 
-**15 thought leader profiles** (Cagan, Torres, Verna, Balfour, Cherny, Singer, Huyen, Rachitsky, Khan, others).
+**14 thought leader profiles** (Cagan, Torres, Verna, Balfour, Cherny, Huyen, Rachitsky, Khan, Gupta, Vohra, Mehta, Bastow, Reforge, Linear Method).
 
 **4 templates**: AI product spec, lite PRD, Linear issue, competitive analysis.
 
@@ -155,7 +163,7 @@ Optional. Set up when ready.
 
 ## Maturity Model
 
-Say "check my setup" to see where you are.
+Ask Claude to audit your setup against the framework (`how should I structure my memory?` triggers the memory-architecture skill, which loads the editorial discipline rules).
 
 | Level | What it looks like |
 |---|---|

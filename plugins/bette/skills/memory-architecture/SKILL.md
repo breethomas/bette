@@ -15,7 +15,7 @@ Help the user structure their PM memory setup or audit an existing one. They may
 ## When to load adjacent context
 
 - The user is just getting started with Bette → flag `/bette-setup`
-- The user is auditing an existing setup → flag `/bette-health`
+- The user is auditing an existing setup → apply the editorial discipline checks directly (no dedicated audit skill; the framework covers it)
 - Context engineering is the broader question → also load `../../frameworks/ai-era-practices/context-engineering.md`
 
 ## Avoid
