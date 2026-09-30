@@ -33,7 +33,7 @@ the codebase conventions and run the right tools.)
 
 The user is a product manager who codes, not a software engineer. The goal is to ship features quickly while respecting engineering quality. Quality gates prevent creating cleanup work for the team.
 
-Reference: `docs/coding/quality-gates.md` for the full checklist. `docs/core-principles.md` for underlying principles.
+Reference: `docs/coding/quality-gates.md` for the full checklist. `docs/coding/pm-who-codes.md` for the principles of coding as a PM. `docs/core-principles.md` for underlying principles.
 
 ## Workflow
 

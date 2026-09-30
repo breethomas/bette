@@ -4,6 +4,8 @@ These checks are non-negotiable. Don't commit code until ALL pass.
 
 Also review [core principles](../core-principles.md) — checkpointing, session management, and documentation-first apply to all work.
 
+The principles behind these gates, including verification, evals and reviews, are in [PM Who Codes](pm-who-codes.md).
+
 ---
 
 ## Your Role as PM Who Codes
