@@ -41,9 +41,9 @@ Meeting transcripts are the worst offenders — they're long, mostly noise, and 
 **Instead:** Always delegate transcript processing: "Extract action items and decisions from this transcript."
 
 ### Accumulated Conversation History
-Long sessions accumulate responses, tool results, and back-and-forth. Past message 15 in a long session, the agent may be working from a lossy summary of your conversation rather than the actual content.
+Long sessions accumulate responses, tool results, and back-and-forth. Once a session fills the model's context window, the agent may be working from a lossy summary of your conversation rather than the actual content. When that happens depends on the model: larger context windows push it much further out.
 
-**Instead:** Restart sessions after 2-3 major tasks (coding) or when you've read 10+ files (strategic/research work). Save state to session notes.
+**Instead:** Save state to session notes after each meaningful chunk of work, and restart when the compaction signals show up (see Measuring Context Health below), not on a task count.
 
 ### Strategic and Research Work
 Strategic work (writing, research, analysis) is especially vulnerable to context bloat because it reads more diverse sources per task than coding. A single pitch-writing session might pull in transcripts, reference files, prior drafts, Notion pages, and Slack threads -- easily 15+ sources. Each one adds to the token count, and compaction treats all of them equally when it fires.
@@ -161,8 +161,8 @@ This gives you control over when and how much of the output enters main context.
 4. Read files you're editing directly
 5. Delegate heavy reads to sub-agents
 6. Track context weight (files read, sources consulted)
-7. For coding: restart after 2-3 major tasks
-8. For strategic/research work: restart after reading 10+ files or 60+ minutes of deep work
+7. Save notes after each meaningful chunk of work, so a restart costs nothing
+8. Restart when compaction signals show up (see below), not on a task or file count. Source-heavy strategic and research work gets there sooner
 
 ### End of Session
 9. Save session notes (what was done, what's next)

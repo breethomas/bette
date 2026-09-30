@@ -168,21 +168,22 @@ Skills should get leaner over time, not fatter. The goal is to encode your judgm
 
 ## Session Management
 
-Context rot is real. Auto-compaction fires at ~167,000 tokens, compressing everything into a lossy summary. The AI doesn't know it happened. Managing sessions is as important as managing the work itself.
+Context rot is real, but when it hits depends on the model. When a session fills the model's context window, auto-compaction compresses older context into a lossy summary, and the AI doesn't always know it happened. Larger context windows push that point much further out. Managing sessions still matters: restart based on what the session shows you, not on a task count.
 
 ### When to Restart
 
-The trigger depends on the type of work:
+Restart when the session shows signs of it, not on a schedule. Restarting on a fixed count throws away context that was still useful.
 
-**Coding sessions** -- restart after 2-3 major tasks. Coding sessions tend to be focused on a small number of files, so context pressure builds slowly.
-
-**Strategic/research/writing sessions** -- restart after reading 10+ diverse sources or after 60+ minutes of deep work. These sessions read more files per task (transcripts, reference docs, prior drafts, Notion pages, Slack threads) and hit compaction faster than coding sessions with fewer completed "tasks."
-
-**Any session** -- restart when you notice:
+**Restart when you notice:**
 - AI suggesting approaches different from what you established
 - Having to re-explain things covered earlier
 - AI "forgetting" files it read recently (a sign compaction fired)
 - Output quality dropping suddenly rather than gradually
+- The work shifting to something unrelated, so the old context is mostly noise
+
+**Where to watch closest:** strategic, research and writing sessions read many diverse sources per task (transcripts, reference docs, prior drafts, Notion pages, Slack threads), so they fill the context window faster than coding sessions. On models with smaller context windows, expect to hit the signals sooner.
+
+**Either way, save notes as you go.** Notes after each meaningful chunk of work make a restart cheap whenever it comes.
 
 ### Before Restarting: Capture State
 
@@ -213,7 +214,7 @@ dev-log.md  # Append to running log
 
 1. **Load context** — point AI to session notes and project context files
 2. **Verify understanding** — confirm AI knows where you left off
-3. **Break down next task** — smaller tasks = better output
+3. **Set the next target** — what good looks like and what's out of scope
 
 ### Session Notes Template
 
@@ -253,15 +254,15 @@ The AI is your collaborator, but you're responsible for:
 
 The AI helps you execute. You ensure the output is responsible.
 
-### Task Breakdown
+### Clear Targets Over Tiny Tasks
 
-**The smaller the task, the better the output.**
+**Current models handle multi-step work well. What they need is a clear target.**
 
-Break work into focused chunks:
+Say what good looks like and what's out of scope:
 - **Bad:** "Write the quarterly strategy update"
-- **Good:** "Draft the Top 3 section for the exec update, following last week's format"
+- **Good:** "Draft the exec update: Top 3, risks and asks. Match last week's format, one page max, no roadmap detail"
 
-Each task should be completable in one focused session.
+Break work up by what you can review or ship on its own, not by what fits in one prompt. Review at checkpoints instead of steering every step.
 
 ### Context Files Over Chat
 

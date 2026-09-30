@@ -29,7 +29,7 @@ Then immediately perform the assessment (do not wait for user input).
 
 ## Context
 
-Context rot is real. AI assistants lose coherence over long sessions. Managing sessions is as important as managing the work itself. This skill helps the user decide whether to continue or restart, and captures state cleanly either way.
+Context rot is real, but when it hits depends on the model's context window. Compaction signals are the reliable trigger for a restart; task and source counts are only hints about when to save notes. This skill helps the user decide whether to continue, save notes, or restart, and captures state cleanly either way.
 
 Reference: `docs/core-principles.md` (Session Management section) for the full framework.
 
@@ -39,13 +39,12 @@ Reference: `docs/core-principles.md` (Session Management section) for the full f
 
 Evaluate these signals by reviewing the conversation so far:
 
-**Task count:**
-- How many distinct tasks or features has the user completed this session?
-- 1 task: session is fresh
-- 2-3 tasks: consider saving notes
-- 4+ tasks: strongly recommend restart
+**Work since the last notes (a hint for saving notes, not a restart trigger):**
+- How many distinct tasks or features has the user completed since notes were last saved?
+- None or one small task: nothing to capture yet
+- One meaningful chunk or more: suggest saving notes so a restart would cost nothing
 
-**Context weight (source diversity):**
+**Context weight (source diversity, a hint about pressure):**
 - Count how many distinct files/sources have been read this session (file reads, Notion pages, Slack threads, tool results)
 - Under 5 sources: low pressure
 - 5-10 sources: moderate pressure
@@ -59,10 +58,10 @@ Evaluate these signals by reviewing the conversation so far:
 - Did Claude suddenly "forget" something it knew 5 minutes ago? (compaction may have fired)
 
 **Work type profiles:**
-- Coding sessions: moderate source diversity, restart after 2-3 tasks
-- Strategic/research/writing sessions: HIGH source diversity (transcripts, reference files, prior drafts, Notion pages, Slack threads). These hit compaction faster with fewer completed "tasks." Weight context pressure more heavily than task count.
-- Meeting prep/inbox triage: high source diversity but each item is self-contained. Task count is a reasonable trigger.
-- Mixed sessions: use whichever trigger fires first
+- Coding sessions: moderate source diversity, context fills slowly
+- Strategic/research/writing sessions: HIGH source diversity (transcripts, reference files, prior drafts, Notion pages, Slack threads). These fill the context window faster, so watch closely for compaction signals.
+- Meeting prep/inbox triage: high source diversity but each item is self-contained. Saving notes between batches is enough.
+- How big the model's context window is matters more than any count. On smaller-window models, expect compaction signals sooner.
 
 ### Step 2: Report the Assessment
 
@@ -85,9 +84,9 @@ Present the assessment clearly:
 
 **Recommendation logic:**
 
-- **Continue** -- 1 task done, under 5 sources, no compaction signals, work is coherent
-- **Save notes & continue** -- 2-3 tasks done OR 5-10 sources read, session is still coherent but should capture state as insurance
-- **Save notes & restart** -- 4+ tasks done, OR 10+ sources read, OR compaction signals present, OR user reports quality decline
+- **Continue** -- no compaction signals and the work is coherent, however many tasks are done
+- **Save notes & continue** -- meaningful work since the last notes, or heavy source reading, and the session is still coherent. Capture state as insurance
+- **Save notes & restart** -- compaction signals present, OR the user reports quality decline, OR the work has shifted to something unrelated
 
 ### Step 3: Generate Session Notes
 
@@ -173,7 +172,7 @@ Options:
 
 Claude should suggest this skill when ANY of these triggers fire, even if the user does not invoke it:
 
-- **Task trigger:** 2-3 major tasks completed
+- **Notes trigger:** 2-3 major tasks completed since notes were last saved (suggest saving notes, not restarting)
 - **Source trigger:** 10+ distinct files/pages/threads read in the session
 - **Compaction trigger:** Claude notices it has "forgotten" something it knew earlier, or the user has to re-explain
 
